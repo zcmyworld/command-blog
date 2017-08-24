@@ -1,6 +1,13 @@
 <template>
   <div class="header">
-    <span class="header-left">Itgo</span>
+    <div class="header-left">
+      <div class="header-left-title">Itgo</div>
+      <div class="drop-box">
+         <div class="icono-hamburger">
+      </div>
+      </div>
+
+    </div>
     <div class="header-right">
       <div class="github-icon">
         <img src="../assets/github.png">
@@ -23,21 +30,41 @@ export default {
     height: 60px;
     background-color: #ffffff;
     box-shadow: 0px 2px 3px #aaaaaa;
+    display: flex;
+    justify-content:space-between;
+    box-sizing:border-box;
+    padding: 0 50px;
   }
 
   .header-left {
     line-height: 60px;
     font-size: 20px;
-    padding-left: 30px;
+    width: 300px;
+    color: #666;
+    box-sizing:border-box;
+    display: flex;
+  }
+
+  .header-right {
+    height: 60px;
+  }
+
+  .header-left-title {
+    text-align: center;
+  }
+
+  .drop-box {
+    height: 60px;
+    cursor: pointer;
+    margin-left: 30px;
+
+  }
+
+  .icono-hamburger {
+    margin-top: 15px;
     color: #666;
   }
   
-  .header-right {
-    float: right;
-    width: 100px;
-    height: 60px;
-    padding-right: 30px;
-  }
   
   .github-icon {
     cursor: pointer;
@@ -45,7 +72,6 @@ export default {
     margin-top: 10px;
     width: 30px;
     height: 30px;
-    float: right;
   }
   
   img {
