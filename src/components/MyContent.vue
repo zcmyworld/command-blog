@@ -1,6 +1,8 @@
 <template>
   <div class="content">
-    HelloWorld
+    <my-article></my-article>
+    <my-article></my-article>
+    <my-article></my-article>
     <my-article></my-article>
   </div>
 </template>
@@ -12,11 +14,17 @@ export default {
   components: {
     MyArticle
   }
-
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .content {
+    display: flex;
+    margin-top: 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
 </style>
