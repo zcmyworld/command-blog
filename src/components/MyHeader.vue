@@ -2,10 +2,10 @@
   <div class="header">
     <div class="header-left">
       <div class="header-left-title">Itgo</div>
-      <div v-if="isCommand" v-on:click="change" class="drop-box" key="normal">
+      <div v-if="isCommand" v-on:click="isCommand = !isCommand" class="drop-box" key="normal">
         <div class="icono-caretDown"></div>
       </div>
-      <div v-else="isCommand" v-on:click="change" class="drop-box" key="editing">
+      <div v-else v-on:click="change" class="drop-box" key="editing">
         <div class="icono-hamburger"></div>
       </div>
     </div>
@@ -23,16 +23,6 @@ export default {
   data () {
     return {
       isCommand: false
-    }
-  },
-  methods: {
-    change: function () {
-      if (this.isCommand) {
-        this.isCommand = false;
-      } else {
-        this.isCommand = true;
-      }
-      return this;
     }
   }
 }
