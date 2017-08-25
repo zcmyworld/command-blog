@@ -2,11 +2,12 @@
   <div class="header">
     <div class="header-left">
       <div class="header-left-title">Itgo</div>
-      <div class="drop-box">
-         <div class="icono-hamburger">
+      <div v-if="isCommand" v-on:click="change" class="drop-box" key="normal">
+        <div class="icono-caretDown"></div>
       </div>
+      <div v-else="isCommand" v-on:click="change" class="drop-box" key="editing">
+        <div class="icono-hamburger"></div>
       </div>
-
     </div>
     <div class="header-right">
       <div class="github-icon">
@@ -19,6 +20,21 @@
 <script>
 export default {
   name: 'MyHeader',
+  data () {
+    return {
+      isCommand: false
+    }
+  },
+  methods: {
+    change: function () {
+      if (this.isCommand) {
+        this.isCommand = false;
+      } else {
+        this.isCommand = true;
+      }
+      return this;
+    }
+  }
 }
 </script>
 
@@ -31,40 +47,41 @@ export default {
     background-color: #ffffff;
     box-shadow: 0px 2px 3px #aaaaaa;
     display: flex;
-    justify-content:space-between;
-    box-sizing:border-box;
+    justify-content: space-between;
+    box-sizing: border-box;
     padding: 0 50px;
   }
-
+  
   .header-left {
     line-height: 60px;
     font-size: 20px;
     width: 300px;
     color: #666;
-    box-sizing:border-box;
+    box-sizing: border-box;
     display: flex;
   }
-
+  
   .header-right {
     height: 60px;
   }
-
+  
   .header-left-title {
     text-align: center;
   }
-
+  
   .drop-box {
     height: 60px;
-    cursor: pointer;
     margin-left: 30px;
-
+    cursor: pointer;
   }
-
+  
   .icono-hamburger {
-    margin-top: 15px;
     color: #666;
   }
   
+  .icono-caretDown {
+    color: #666;
+  }
   
   .github-icon {
     cursor: pointer;
