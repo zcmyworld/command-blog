@@ -20,10 +20,10 @@
       <transition v-on:enter="enter">
         <div v-if="isCommand" class="command-box-talker" id="commandBoxTalker">
           <template v-for="item in oldCommands">
-            <div class="command-item">{{ item.message }}</div>
+            <div class="command-item"><span class="command-icon">$</span>{{ item.message }}</div>
           </template>
           <div class="input-box">
-            <input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup="getCommand" ref="commandblock" />
+            <span class="command-icon">$</span><input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup.enter="getCommand" ref="commandblock" />
           </div>
         </div>
       </transition>
@@ -62,32 +62,29 @@ export default {
       Velocity(el, { top:0 }, { duration: 300 })
     },
     getCommand: function(ev) {
-      if (ev.code == 'Enter') {
-        var commandblock = this.$refs.commandblock.value;
-        this.$refs.commandblock.value = '';
-        this.oldCommands.push({
-          message: commandblock
-        })
+      var commandblock = this.$refs.commandblock.value;
+      this.$refs.commandblock.value = '';
+      this.oldCommands.push({
+        message: commandblock
+      })
 
-        if (commandblock == 'home') {
-          router.push('/');
-        }
-        if (commandblock == 'tool') {
-          router.push('tool');
-        }
-
-        if (commandblock == 'clear') {
-          this.oldCommands = [];
-        }
-
-        //渲染完畢觸發
-        this.$nextTick(function(){
-          var container = this.$el.querySelector("#commandBoxTalker");
-          container.scrollTop = container.scrollHeight;
-        })
-
-        return this;
+      if (commandblock == 'home') {
+        router.push('/');
       }
+      if (commandblock == 'tool') {
+        router.push('tool');
+      }
+
+      if (commandblock == 'clear') {
+        this.oldCommands = [];
+      }
+
+      //渲染完畢觸發
+      this.$nextTick(function(){
+        var container = this.$el.querySelector("#commandBoxTalker");
+        container.scrollTop = container.scrollHeight;
+      })
+      return this;
     }
   }
 }
@@ -102,13 +99,22 @@ export default {
     height: 20px;
   }
 
+  .command-icon {
+    color: rgb(100,100,100);
+    font-size: 16px;
+    margin-right: 5px;
+    line-height: 20px;
+  }
+
   .input-box {
+    display:flex;
     height: 20px;
     margin-left: 10px;
     margin-top: 3px;
   }
 
   .command-box-line {
+    font: inherit;
     font-size: 20px;
     background-color: black;
     border: none;
