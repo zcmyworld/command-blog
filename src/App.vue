@@ -7,13 +7,11 @@
 
 <script>
 import MyHeader from './components/MyHeader.vue';
-import MyContent from './components/MyContent.vue';
   
 export default {
   name: 'app',
   components: {
-    MyHeader,
-    MyContent
+    MyHeader
   }
 }
 </script>

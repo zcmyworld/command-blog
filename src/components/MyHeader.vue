@@ -1,34 +1,143 @@
 <template>
-  <div class="header">
-    <div class="header-left">
-      <div class="header-left-title">Itgo</div>
-      <div v-if="isCommand" v-on:click="isCommand = !isCommand" class="drop-box" key="normal">
-        <div class="icono-caretDown"></div>
+  <div class="header-box">
+    <div class="header">
+      <div class="header-left">
+        <div class="header-left-title">Itgo</div>
+        <div v-if="isCommand" v-on:click="showCommandBox" class="drop-box" key="normal">
+          <div class="icono-caretDown"></div>
+        </div>
+        <div v-else v-on:click="showCommandBox" class="drop-box" key="editing">
+          <div class="icono-hamburger"></div>
+        </div>
       </div>
-      <div v-else v-on:click="change" class="drop-box" key="editing">
-        <div class="icono-hamburger"></div>
+      <div class="header-right">
+        <div class="github-icon">
+          <img src="../assets/github.png">
+        </div>
       </div>
     </div>
-    <div class="header-right">
-      <div class="github-icon">
-        <img src="../assets/github.png">
-      </div>
+    <div class="command-box" v-on:click="clickCommandBox">
+      <transition v-on:enter="enter">
+        <div v-if="isCommand" class="command-box-talker" id="commandBoxTalker">
+          <template v-for="item in oldCommands">
+            <div class="command-item">{{ item.message }}</div>
+          </template>
+          <div class="input-box">
+            <input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup="getCommand" ref="commandblock" />
+          </div>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
+import Velocity from 'velocity-animate';
+import router from './../router/index.js'
 export default {
   name: 'MyHeader',
   data () {
     return {
-      isCommand: false
+      isCommand: true,
+      msg: 'helloworld',
+      oldCommands: [{
+        message: 'hello'
+      }, {
+        message: 'world'
+      }]
+    }
+  },
+  methods: {
+    clickCommandBox: function() {
+      let container = this.$el.querySelector("#inputCommand");
+      container && container.focus(container);
+    },
+    showCommandBox: function() {
+      this.isCommand = !this.isCommand;
+      return this;
+    },
+    enter: function (el, done) {
+      let container = this.$el.querySelector("#inputCommand");
+      container && container.focus(container);
+      Velocity(el, { top:0 }, { duration: 300 })
+    },
+    getCommand: function(ev) {
+      if (ev.code == 'Enter') {
+        var commandblock = this.$refs.commandblock.value;
+        this.$refs.commandblock.value = '';
+        this.oldCommands.push({
+          message: commandblock
+        })
+
+        if (commandblock == 'home') {
+          router.push('/');
+        }
+        if (commandblock == 'tool') {
+          router.push('tool');
+        }
+
+        if (commandblock == 'clear') {
+          this.oldCommands = [];
+        }
+
+        //渲染完畢觸發
+        this.$nextTick(function(){
+          var container = this.$el.querySelector("#commandBoxTalker");
+          container.scrollTop = container.scrollHeight;
+        })
+
+        return this;
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+  .command-item {
+    margin-left: 10px;
+    margin-top: 3px;
+    color: rgb(100,100,100);
+    font-size: 20px;
+    height: 20px;
+  }
+
+  .input-box {
+    height: 20px;
+    margin-left: 10px;
+    margin-top: 3px;
+  }
+
+  .command-box-line {
+    font-size: 20px;
+    background-color: black;
+    border: none;
+    color: rgb(100,100,100);
+    outline: none;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .command-box {
+    width: 100%;
+    position: fixed;
+    padding: 0 50px;
+    box-sizing: border-box;
+  }
+  
+  .command-box-talker {
+    background-color: black;
+    opacity: 0.8;
+    height: 400px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    opacity: 0.8;
+  }
+  
   .header {
     position: fixed;
     top: 0px;
