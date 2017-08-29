@@ -35,6 +35,8 @@
 <script>
 import Velocity from 'velocity-animate';
 import router from './../router/index.js'
+import { EventBus } from '../event-bus.js';
+
 export default {
   name: 'MyHeader',
   data () {
@@ -43,6 +45,12 @@ export default {
       msg: 'helloworld',
       oldCommands: []
     }
+  },
+  created() {
+    EventBus.$on('ev_commandBoxChange', () => {
+      this.isCommand = !this.isCommand;
+      return this;
+    })
   },
   methods: {
     clickCommandBox: function() {

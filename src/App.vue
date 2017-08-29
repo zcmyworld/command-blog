@@ -11,6 +11,7 @@
 <script>
 import MyHeader from './components/MyHeader.vue';
 import MyHeaderEmpty from './components/MyHeaderEmpty.vue';
+import { EventBus } from './event-bus.js';
   
 export default {
   name: 'app',
@@ -25,7 +26,7 @@ export default {
     keyboardHandler: function (ev) {
       //打开控制台
       if (ev.code == 'Backquote') {
-        console.log(123)
+        EventBus.$emit('ev_commandBoxChange')
       }
     }
   }
