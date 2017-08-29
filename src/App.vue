@@ -17,6 +17,17 @@ export default {
   components: {
     MyHeaderEmpty,
     MyHeader
+  },
+  created: function () {
+    window.addEventListener('keyup', this.keyboardHandler)
+  },
+  methods: {
+    keyboardHandler: function (ev) {
+      //打开控制台
+      if (ev.code == 'Backquote') {
+        console.log(123)
+      }
+    }
   }
 }
 </script>

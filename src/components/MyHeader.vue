@@ -70,6 +70,7 @@ export default {
       }
 
       else if (commandblock == 'exit') {
+        this.oldCommands = [];
         this.isCommand = false;
       } 
       else if (commandblock == 'clear') {
@@ -79,7 +80,7 @@ export default {
         commandblock = commandblock + ': command not found'
       }
 
-      if (commandblock != 'clear') {
+      if (commandblock != 'clear' && commandblock != 'exit') {
         this.oldCommands.push({
           message: commandblock
         })
