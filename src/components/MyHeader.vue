@@ -43,7 +43,9 @@ export default {
     return {
       isCommand: false,
       msg: 'helloworld',
-      oldCommands: []
+      oldCommands: [{
+        message: "I'm Itgo, nice to meet you ."
+      }]
     }
   },
   created() {
@@ -75,13 +77,23 @@ export default {
       var commandblock = this.$refs.commandblock.value;
       this.$refs.commandblock.value = '';
 
+      if (commandblock != 'clear' && commandblock != 'exit') {
+        this.oldCommands.push({
+          message: "> " + commandblock
+        })
+      }
       if (commandblock == 'home') {
         router.push('/');
+        this.oldCommands.push({
+          message: 'Jumping to home'
+        })
       }
       else if (commandblock == 'tool') {
         router.push('tool');
+        this.oldCommands.push({
+         message: 'Jumping to tool'
+        })
       }
-
       else if (commandblock == 'exit') {
         this.oldCommands = [];
         this.isCommand = false;
@@ -91,13 +103,11 @@ export default {
       }
       else {
         commandblock = commandblock + ': command not found'
-      }
-
-      if (commandblock != 'clear' && commandblock != 'exit') {
         this.oldCommands.push({
           message: commandblock
         })
       }
+
 
       //渲染完畢觸發
       this.$nextTick(function(){
