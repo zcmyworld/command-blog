@@ -14,6 +14,6 @@ export default {
 
 <style scoped>
   .tool {
-    margin-top: 60px;
+    margin-top: 30px;
   }
 </style>

@@ -21,7 +21,6 @@ export default {
 <style scoped>
   .content {
     display: flex;
-    margin-top: 60px;
     flex-direction: column;
     justify-content: center;
     align-items: center;

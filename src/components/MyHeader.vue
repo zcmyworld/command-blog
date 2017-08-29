@@ -21,7 +21,7 @@
         <div v-if="isCommand" class="command-box-talker" id="commandBoxTalker">
           <template v-for="item in oldCommands">
             <div class="command-item">
-            {{ item.message }}</div>
+              {{ item.message }}</div>
           </template>
           <div class="input-box">
             <input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup.enter="getCommand" ref="commandblock" />
@@ -39,13 +39,9 @@ export default {
   name: 'MyHeader',
   data () {
     return {
-      isCommand: true,
+      isCommand: false,
       msg: 'helloworld',
-      oldCommands: [{
-        message: 'hello'
-      }, {
-        message: 'world'
-      }]
+      oldCommands: []
     }
   },
   methods: {
@@ -65,19 +61,28 @@ export default {
     getCommand: function(ev) {
       var commandblock = this.$refs.commandblock.value;
       this.$refs.commandblock.value = '';
-      this.oldCommands.push({
-        message: commandblock
-      })
 
       if (commandblock == 'home') {
         router.push('/');
       }
-      if (commandblock == 'tool') {
+      else if (commandblock == 'tool') {
         router.push('tool');
       }
 
-      if (commandblock == 'clear') {
+      else if (commandblock == 'exit') {
+        this.isCommand = false;
+      } 
+      else if (commandblock == 'clear') {
         this.oldCommands = [];
+      }
+      else {
+        commandblock = commandblock + ': command not found'
+      }
+
+      if (commandblock != 'clear') {
+        this.oldCommands.push({
+          message: commandblock
+        })
       }
 
       //渲染完畢觸發
@@ -95,23 +100,23 @@ export default {
   .command-item {
     margin-left: 10px;
     margin-top: 3px;
-    color: rgb(100,100,100);
+    color: rgb(100, 100, 100);
     font-size: 20px;
     height: 20px;
   }
-
+  
   .input-box {
     height: 20px;
     margin-left: 10px;
     margin-top: 3px;
   }
-
+  
   .command-box-line {
     font: inherit;
     font-size: 20px;
     background-color: black;
     border: none;
-    color: rgb(100,100,100);
+    color: rgb(100, 100, 100);
     outline: none;
     padding: 0;
     width: 100%;
@@ -122,6 +127,7 @@ export default {
     width: 100%;
     position: fixed;
     padding: 0 50px;
+    top: 60px;
     box-sizing: border-box;
   }
   
