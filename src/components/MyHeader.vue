@@ -20,10 +20,11 @@
       <transition v-on:enter="enter">
         <div v-if="isCommand" class="command-box-talker" id="commandBoxTalker">
           <template v-for="item in oldCommands">
-            <div class="command-item"><span class="command-icon">$</span>{{ item.message }}</div>
+            <div class="command-item">
+            {{ item.message }}</div>
           </template>
           <div class="input-box">
-            <span class="command-icon">$</span><input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup.enter="getCommand" ref="commandblock" />
+            <input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup.enter="getCommand" ref="commandblock" />
           </div>
         </div>
       </transition>
@@ -99,15 +100,7 @@ export default {
     height: 20px;
   }
 
-  .command-icon {
-    color: rgb(100,100,100);
-    font-size: 16px;
-    margin-right: 5px;
-    line-height: 20px;
-  }
-
   .input-box {
-    display:flex;
     height: 20px;
     margin-left: 10px;
     margin-top: 3px;
