@@ -125,19 +125,19 @@ export default {
     margin-left: 10px;
     margin-top: 3px;
     color: rgb(100, 100, 100);
-    font-size: 20px;
-    height: 20px;
+    /*font-size: 20px;*/
+    height: 25px;
   }
   
   .input-box {
-    height: 20px;
+    height: 25px;
     margin-left: 10px;
     margin-top: 3px;
   }
   
   .command-box-line {
     font: inherit;
-    font-size: 20px;
+    /*font-size: 20px;*/
     background-color: black;
     border: none;
     color: rgb(100, 100, 100);
