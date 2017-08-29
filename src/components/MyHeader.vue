@@ -24,7 +24,7 @@
               {{ item.message }}</div>
           </template>
           <div class="input-box">
-            <input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup.enter="getCommand" ref="commandblock" />
+            <input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup.enter="getCommand" v-on:keydown="inputKeydown" ref="commandblock" />
           </div>
         </div>
       </transition>
@@ -53,6 +53,11 @@ export default {
     })
   },
   methods: {
+    inputKeydown: function(ev) {
+      if (ev.code == 'Backquote') {
+        ev.preventDefault();
+      }
+    },
     clickCommandBox: function() {
       let container = this.$el.querySelector("#inputCommand");
       container && container.focus(container);
