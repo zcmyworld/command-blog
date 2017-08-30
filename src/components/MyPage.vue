@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="mypage">
     <h1 class="title">最简单的组件化工程</h1>
     <span class="post-time">Posted on 2017.05.02</span>
     <div class="content">
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style scoped>
-  .container {
+  .mypage {
     margin-top: 30px;
     width: 980px;
     margin-right: auto;
@@ -97,7 +97,5 @@ export default {
     margin-top: 20px;
     border: 1px solid rgb(180, 180, 180);
     margin-bottom: 20px;
-    border-radius: 3px;
-    /*10px 10px 5px 5px pink inse*/
   }
 </style>

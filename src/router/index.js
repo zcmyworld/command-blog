@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import MyContent from '@/components/MyContent'
 import MyTool from '@/components/MyTool'
 import MyPage from '@/components/MyPage'
+import MyAdmin from '@/components/admin/MyAdmin'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/page',
       name: 'MyPage',
       component: MyPage
+    },
+    {
+      path: '/admin',
+      name: 'MyAdmin',
+      component: MyAdmin
     }
   ]
 })
