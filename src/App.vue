@@ -5,19 +5,22 @@
     <transition name="fade">
       <router-view></router-view>
     </transition>
+    <my-footer></my-footer>
   </div>
 </template>
 
 <script>
 import MyHeader from './components/MyHeader.vue';
 import MyHeaderEmpty from './components/MyHeaderEmpty.vue';
+import MyFooter from './components/MyFooter.vue';
 import { EventBus } from './event-bus.js';
   
 export default {
   name: 'app',
   components: {
     MyHeaderEmpty,
-    MyHeader
+    MyHeader,
+    MyFooter
   },
   created: function () {
     window.addEventListener('keyup', this.keyboardHandler)

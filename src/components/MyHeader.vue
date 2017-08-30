@@ -101,13 +101,17 @@ export default {
       else if (commandblock == 'clear') {
         this.oldCommands = [];
       }
+      else if (commandblock == 'login') {
+        this.oldCommands.push({
+          message: 'Who are you'
+        })
+      }
       else {
         commandblock = commandblock + ': command not found'
         this.oldCommands.push({
           message: commandblock
         })
       }
-
 
       //渲染完畢觸發
       this.$nextTick(function(){
