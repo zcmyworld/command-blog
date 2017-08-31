@@ -1,12 +1,14 @@
 <template>
-  <div class="my-admin-menu">
-    <ul>
-      <li class="menu-item">
-        <span>文章</span>
-      </li>
-      <li class="menu-item">Disk</li>
-      <li class="menu-item">文章</li>
-    </ul>
+  <div class="my-admin-menu-box">
+    <div class="my-admin-menu">
+      <ul>
+        <li class="menu-item">
+          <span>文章</span>
+        </li>
+        <li class="menu-item">Disk</li>
+        <li class="menu-item">文章</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -17,9 +19,12 @@ export default {
 </script>
 
 <style scoped>
-  .my-admin-menu {
+  .my-admin-menu-box {
     width: 120px;
-    border-right: 1px solid rgb(180, 180, 180);
+    box-sizing: border-box;
+  }
+
+  .my-admin-menu {
   }
   
   .menu-item {
