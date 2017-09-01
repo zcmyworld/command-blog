@@ -1,6 +1,6 @@
 <template>
   <div class="my-admin-panel-box">
-    <my-admin-article-list></my-admin-article-list>
+    <router-view></router-view>
   </div>
 </template>
 

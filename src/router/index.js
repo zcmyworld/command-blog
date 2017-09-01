@@ -4,6 +4,10 @@ import MyContent from '@/components/MyContent'
 import MyTool from '@/components/MyTool'
 import MyPage from '@/components/MyPage'
 import MyAdmin from '@/components/admin/MyAdmin'
+import MyAdminArticleList from '@/components/admin/MyAdminArticleList'
+import MyAdminEditArticle from '@/components/admin/MyAdminEditArticle'
+
+
 
 Vue.use(Router)
 
@@ -11,23 +15,26 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'MyContent',
       component: MyContent
     },
     {
       path: '/tool',
-      name: 'MyTool',
       component: MyTool
     },
     {
       path: '/page',
-      name: 'MyPage',
       component: MyPage
     },
     {
       path: '/admin',
-      name: 'MyAdmin',
-      component: MyAdmin
+      component: MyAdmin,
+      children: [{
+        path: 'articlelist',
+        component: MyAdminArticleList
+      }, {
+        path: 'editarticle',
+        component: MyAdminEditArticle
+      }]
     }
   ]
 })
