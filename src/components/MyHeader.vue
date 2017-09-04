@@ -24,7 +24,8 @@
               {{ item.message }}</div>
           </template>
           <div class="input-box">
-            <input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup.enter="getCommand" v-on:keydown="inputKeydown" ref="commandblock" />
+            <input spellcheck="false" id="inputCommand" class="command-box-line" v-on:keyup.enter="getCommand" v-on:keydown="inputKeydown"
+              ref="commandblock" />
           </div>
         </div>
       </transition>
@@ -36,6 +37,7 @@
 import Velocity from 'velocity-animate';
 import router from './../router/index.js'
 import { EventBus } from '../event-bus.js';
+import CommandHandler from '../CommandHandler.js';
 
 export default {
   name: 'MyHeader',
@@ -51,6 +53,27 @@ export default {
   created() {
     EventBus.$on('ev_commandBoxChange', () => {
       this.isCommand = !this.isCommand;
+      return this;
+    })
+    EventBus.$on('terminal_close', () => {
+      this.oldCommands = [];
+      this.isCommand = false;
+      return this;
+    })
+    EventBus.$on('terminal_show', (message) => {
+      this.oldCommands.push({
+        message: message
+      })
+      return this;
+    })
+    EventBus.$on('terminal_notfound', (message) => {
+      this.oldCommands.push({
+        message: message + ': command not found'
+      })
+      return this;
+    })
+    EventBus.$on('terminal_clear', (message) => {
+      this.oldCommands = [];
       return this;
     })
   },
@@ -77,41 +100,25 @@ export default {
       var commandblock = this.$refs.commandblock.value;
       this.$refs.commandblock.value = '';
 
-      if (commandblock != 'clear' && commandblock != 'exit') {
-        this.oldCommands.push({
-          message: "> " + commandblock
-        })
-      }
-      if (commandblock == 'home') {
-        router.push('/');
-        this.oldCommands.push({
-          message: 'Jumping to home'
-        })
-      }
-      else if (commandblock == 'tool') {
-        router.push('tool');
-        this.oldCommands.push({
-         message: 'Jumping to tool'
-        })
-      }
-      else if (commandblock == 'exit') {
-        this.oldCommands = [];
-        this.isCommand = false;
-      } 
-      else if (commandblock == 'clear') {
-        this.oldCommands = [];
-      }
-      else if (commandblock == 'login') {
-        this.oldCommands.push({
-          message: 'Who are you'
-        })
-      }
-      else {
-        commandblock = commandblock + ': command not found'
-        this.oldCommands.push({
-          message: commandblock
-        })
-      }
+      CommandHandler.handle(commandblock);
+
+      // if (commandblock != 'clear' && commandblock != 'exit') {
+      //   this.oldCommands.push({
+      //     message: "> " + commandblock
+      //   })
+      // }
+      // if (commandblock == 'home') {
+      //   router.push('/');
+      //   this.oldCommands.push({
+      //     message: 'Jumping to home'
+      //   })
+      // }
+      // else if (commandblock == 'tool') {
+      //   router.push('tool');
+      //   this.oldCommands.push({
+      //    message: 'Jumping to tool'
+      //   })
+      // }
 
       //渲染完畢觸發
       this.$nextTick(function(){
