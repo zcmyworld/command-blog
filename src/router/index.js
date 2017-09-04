@@ -16,6 +16,10 @@ export default new Router({
       component: MyContent
     },
     {
+      path: '/article/:id',
+      component: MyPage
+    },
+    {
       path: '/tool',
       component: MyTool
     },

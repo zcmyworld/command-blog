@@ -1,8 +1,31 @@
-// import exit from '@/commands/exit';
+import router from '@/router'
+
+let plugins = ['article'];
+
+function getPluginByPath() {
+  let route_path = router.currentRoute.path;
+  return route_path.split('/')[1];
+}
+
+function in_array(item, arr) {
+  for (let i in arr) {
+    if (item == arr[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
 
 function getCommand(key) {
   try {
-    let model = require(`@/commands/${key}`);
+    let pluginName = getPluginByPath();
+    let model = null;
+    try {
+      model = require(`@/components/${pluginName}/commands/${key}`);
+    } catch (e) {
+      model = require(`@/commands/${key}`);
+    }
     return model.default;
   } catch (e) {
     let model = require(`@/commands/notfound`);

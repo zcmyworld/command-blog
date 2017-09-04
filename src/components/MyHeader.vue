@@ -102,11 +102,11 @@ export default {
 
       CommandHandler.handle(commandblock);
 
-      // if (commandblock != 'clear' && commandblock != 'exit') {
-      //   this.oldCommands.push({
-      //     message: "> " + commandblock
-      //   })
-      // }
+      if (commandblock != 'clear' && commandblock != 'exit') {
+        this.oldCommands.push({
+          message: "> " + commandblock
+        })
+      }
       // if (commandblock == 'home') {
       //   router.push('/');
       //   this.oldCommands.push({
