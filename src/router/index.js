@@ -5,8 +5,6 @@ import MyTool from '@/components/MyTool'
 import MyPage from '@/components/article/MyPage'
 import MyAdmin from '@/components/admin/MyAdmin'
 
-
-
 Vue.use(Router)
 
 export default new Router({
