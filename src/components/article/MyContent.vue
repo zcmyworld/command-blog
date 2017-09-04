@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import MyArticle from '@/components/MyArticle.vue';
+import MyArticle from '@/components/article/MyArticle.vue';
 export default {
   name: 'MyContent',
   components: {

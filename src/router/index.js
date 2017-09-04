@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import MyContent from '@/components/MyContent'
+import MyContent from '@/components/article/MyContent'
 import MyTool from '@/components/MyTool'
-import MyPage from '@/components/MyPage'
+import MyPage from '@/components/article/MyPage'
 import MyAdmin from '@/components/admin/MyAdmin'
-import MyAdminArticleList from '@/components/admin/MyAdminArticleList'
-import MyAdminEditArticle from '@/components/admin/MyAdminEditArticle'
 
 
 
@@ -28,13 +26,6 @@ export default new Router({
     {
       path: '/admin',
       component: MyAdmin,
-      children: [{
-        path: 'articlelist',
-        component: MyAdminArticleList
-      }, {
-        path: 'editarticle',
-        component: MyAdminEditArticle
-      }]
     }
   ]
 })
