@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
       },
       {
         path: '/article/:id/edit',
-        component: 'article/MyPage'
+        component: 'article/ArticleEdit'
       },
       {
         path: '/article/:id',

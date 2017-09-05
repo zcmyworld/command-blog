@@ -21,7 +21,7 @@ class ITOS {
   init() {
     $.ajax({
       method: "get",
-      url: "http://127.0.0.1:3001",
+      url: "http://192.168.2.8:3001",
       async: false
     }).done((msg) => {
       this.Plugin = new Plugin(msg.plugins);

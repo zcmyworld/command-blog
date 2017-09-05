@@ -30,6 +30,8 @@ function getCommand(key) {
       } else {
         model = require(`@/commands/${key}`);
       }
+    } else {
+      model = require(`@/commands/${key}`);
     }
 
     return model.default;
