@@ -39,6 +39,7 @@ import router from './../router/index.js'
 import { EventBus } from '../event-bus.js';
 import CommandHandler from '../CommandHandler.js';
 
+
 export default {
   name: 'MyHeader',
   data () {
@@ -50,6 +51,7 @@ export default {
       }]
     }
   },
+  
   created() {
     EventBus.$on('ev_commandBoxChange', () => {
       this.isCommand = !this.isCommand;

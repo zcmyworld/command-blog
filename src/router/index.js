@@ -11,7 +11,10 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: MyContent
+      component: MyContent,
+      beforeEnter (to, from, next) {
+        next();
+      },
     },
     {
       path: '/article/:id',

@@ -1,4 +1,5 @@
 import router from '@/router'
+import ITOS from '@/ITOS';
 
 let plugins = ['article'];
 
@@ -21,11 +22,15 @@ function getCommand(key) {
   try {
     let pluginName = getPluginByPath();
     let model = null;
-    try {
-      model = require(`@/components/${pluginName}/commands/${key}`);
-    } catch (e) {
-      model = require(`@/commands/${key}`);
+    //判斷是否使用plugin裏面的命令
+    if (ITOS.Plugin.isPlugin(pluginName)) {
+      if (ITOS.Plugin.isCommand(pluginName, key)) {
+        model = require(`@/components/${pluginName}/commands/${key}`);
+      } else {
+        model = require(`@/commands/${key}`);
+      }
     }
+
     return model.default;
   } catch (e) {
     let model = require(`@/commands/notfound`);
@@ -37,12 +42,5 @@ export default {
   handle(command) {
     let model = getCommand(command);
     model.exec(command);
-    // import exit from '@/commands/exit';
-    // console.log(command)
-    // let exit = require('@/commands/exit')
-    // console.log(exit.default)
-    // if (exit.name == command) {
-    //   exit.exec();
-    // }
   }
 };

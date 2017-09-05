@@ -14,7 +14,10 @@ import MyHeader from './components/MyHeader.vue';
 import MyHeaderEmpty from './components/MyHeaderEmpty.vue';
 import MyFooter from './components/MyFooter.vue';
 import { EventBus } from './event-bus.js';
-  
+import ITOS from './ITOS';
+
+ITOS.Plugin.init();
+
 export default {
   name: 'app',
   components: {
@@ -22,6 +25,7 @@ export default {
     MyHeader,
     MyFooter
   },
+ 
   created: function () {
     window.addEventListener('keyup', this.keyboardHandler)
   },
@@ -37,10 +41,16 @@ export default {
 </script>
 
 <style>
-  .fade-enter-active, .fade-leave-active {
+  .fade-enter-active,
+  .fade-leave-active {
     /*transition: opacity .5s*/
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  
+  .fade-enter,
+  .fade-leave-to
+  /* .fade-leave-active below version 2.1.8 */
+  
+  {
     opacity: 0
   }
 </style>
