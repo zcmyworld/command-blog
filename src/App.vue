@@ -14,9 +14,6 @@ import MyHeader from './components/MyHeader.vue';
 import MyHeaderEmpty from './components/MyHeaderEmpty.vue';
 import MyFooter from './components/MyFooter.vue';
 import { EventBus } from './event-bus.js';
-import ITOS from './ITOS';
-
-ITOS.Plugin.init();
 
 export default {
   name: 'app',

@@ -1,10 +1,11 @@
-import router from '@/router'
+// import router from '@/router'
 import ITOS from '@/ITOS';
 
 let plugins = ['article'];
 
 function getPluginByPath() {
-  let route_path = router.currentRoute.path;
+  // let route_path = router.currentRoute.path;
+  let route_path = ITOS.Router.currentRoute.path;
   return route_path.split('/')[1];
 }
 

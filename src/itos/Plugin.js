@@ -1,4 +1,3 @@
-import $ from 'jquery';
 
 function getPluginByName(plugins, pname) {
   for (let i in plugins) {
@@ -9,9 +8,9 @@ function getPluginByName(plugins, pname) {
   return null;
 }
 
-class Plugin {
-  constructor() {
-    this.plugins = [];
+export default class Plugin {
+  constructor(plugins) {
+    this.plugins = plugins;
   }
   //獲取所有插件
   all() {
@@ -40,15 +39,5 @@ class Plugin {
     }
     return false;
   }
-  init() {
-    $.ajax({
-      method: "get",
-      url: "http://127.0.0.1:3001",
-      async: false
-    }).done((msg) => {
-      this.plugins = msg.plugins
-    });
-  }
-}
 
-export default new Plugin();
+}
