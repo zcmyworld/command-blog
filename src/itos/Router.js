@@ -6,7 +6,6 @@ import MyContent from '@/components/article/MyContent'
 import Vue from 'vue'
 
 
-
 class ITOSRouter extends Router {
 }
 
