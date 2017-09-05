@@ -1,5 +1,5 @@
 import Terminal from '@/itos/Terminal';
-import router from '@/itos/Router';
+import ITOSRouter from '@/itos/Router';
 import Plugin from '@/itos/Plugin';
 import { EventBus } from '@/event-bus.js';
 import $ from 'jquery';
@@ -8,11 +8,12 @@ import Vue from 'vue'
 
 import App from './App'
 
+const router = ITOSRouter.router;
 
 class ITOS {
   constructor() {
     this.Terminal = Terminal;
-    this.Router = router;
+    this.Router = ITOSRouter;
     this.event = EventBus;
     this.Plugin = null;
   }

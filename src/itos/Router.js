@@ -5,20 +5,32 @@ import MyPage from '@/components/article/MyPage'
 import MyContent from '@/components/article/MyContent'
 import Vue from 'vue'
 
+Vue.use(Router);
 
-class ITOSRouter extends Router {
+const router = new Router();
+
+class ITOSRouter {
+  constructor() {
+    this.router = router;
+  }
 }
 
-Vue.use(ITOSRouter);
 
 
-let router = new ITOSRouter();
+function view(name) {
+  return function (resolve) {
+    require(['@/components/' + name + '.vue'], resolve);
+  }
+};
 
+let itosRouter = new ITOSRouter();
 
-router.addRoutes([
+console.log(itosRouter)
+
+itosRouter.router.addRoutes([
   {
     path: '/',
-    component: MyContent,
+    component: view('article/MyContent'),
   },
   {
     path: '/article/:id/edit',
@@ -32,7 +44,7 @@ router.addRoutes([
     path: '/page',
     component: MyPage
   },
-
 ]);
 
-export default router;
+
+export default itosRouter;

@@ -5,7 +5,7 @@ let plugins = ['article'];
 
 function getPluginByPath() {
   // let route_path = router.currentRoute.path;
-  let route_path = ITOS.Router.currentRoute.path;
+  let route_path = ITOS.Router.router.currentRoute.path;
   return route_path.split('/')[1];
 }
 
