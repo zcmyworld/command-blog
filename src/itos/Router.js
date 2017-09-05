@@ -13,9 +13,30 @@ class ITOSRouter {
   constructor() {
     this.router = router;
   }
+
+  setRoutes(routeConfig) {
+    // this.routeConfig
+
+    this.router.addRoutes([
+      {
+        path: '/',
+        component: view('article/MyContent'),
+      },
+      {
+        path: '/article/:id/edit',
+        component: MyPage
+      },
+      {
+        path: '/article/:id',
+        component: MyPage
+      },
+      {
+        path: '/page',
+        component: MyPage
+      },
+    ]);
+  }
 }
-
-
 
 function view(name) {
   return function (resolve) {
@@ -25,26 +46,7 @@ function view(name) {
 
 let itosRouter = new ITOSRouter();
 
-console.log(itosRouter)
 
-itosRouter.router.addRoutes([
-  {
-    path: '/',
-    component: view('article/MyContent'),
-  },
-  {
-    path: '/article/:id/edit',
-    component: MyPage
-  },
-  {
-    path: '/article/:id',
-    component: MyPage
-  },
-  {
-    path: '/page',
-    component: MyPage
-  },
-]);
 
 
 export default itosRouter;

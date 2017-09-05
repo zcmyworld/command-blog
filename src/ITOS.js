@@ -25,6 +25,8 @@ class ITOS {
       async: false
     }).done((msg) => {
       this.Plugin = new Plugin(msg.plugins);
+      // this.Plugin = new Plugin(msg.plugins);
+      this.Router.setRoutes();
     });
 
     Vue.config.productionTip = false
