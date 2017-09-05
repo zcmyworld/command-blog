@@ -22,16 +22,8 @@ app.get('/', function (req, res) {
         component: 'article/MyPage'
       },
       {
-        path: '/tool',
-        component: 'MyTool'
-      },
-      {
         path: '/page',
         component: 'article/MyPage'
-      },
-      {
-        path: '/admin',
-        component: 'admin/MyAdmin',
       }
     ]
   });
