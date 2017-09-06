@@ -6,14 +6,18 @@
     <div class="created-box">
       <span>Posted on 2017.05.02</span>
     </div>
-    <textarea></textarea>
+    <my-editor></my-editor>
+
   </div>
 </template>
 
 <script>
-
+import MyEditor from '@/components/article/MyEditor';
 export default {
   name: 'MyAdminEditArticle',
+  components: {
+    MyEditor
+  }
 }
 </script>
 
@@ -31,7 +35,6 @@ export default {
     box-sizing: border-box;
     padding: 5px;
   }
-
   
   .created-box {
     width: 100%;
