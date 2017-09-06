@@ -18,10 +18,14 @@ class ITOSRouter {
     let routeArr = [];
     for (let i in routeConfig) {
       let currentRoute = routeConfig[i];
-      routeArr.push({
+      let item = {
         path: currentRoute.path,
         component: view(currentRoute.component)
-      })
+      }
+      if (currentRoute.redirect) {
+        item.redirect = currentRoute.redirect
+      }
+      routeArr.push(item)
     }
     this.router.addRoutes(routeArr);
   }

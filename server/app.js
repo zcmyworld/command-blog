@@ -6,11 +6,16 @@ app.get('/', function (req, res) {
   res.send({
     plugins: [{
       name: 'article',
-      commands: ['edit', 'save', 'delete']
+      commands: ['edit', 'save', 'delete', 'quit']
     }],
+    defaultPlugin: 'article',
     routes: [
       {
         path: '/',
+        redirect: '/article'
+      },
+      {
+        path: '/article',
         component: 'article/MyContent',
       },
       {
