@@ -1,6 +1,7 @@
 import ITOS from '@/ITOS';
 
 export default {
-  exec(route_path) {
+  exec() {
+    ITOS.Terminal.print('save success ..');
   }
 }

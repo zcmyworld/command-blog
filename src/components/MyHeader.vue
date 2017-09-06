@@ -61,7 +61,7 @@ export default {
       this.isCommand = false;
       return this;
     })
-    EventBus.$on('terminal_show', (message) => {
+    EventBus.$on('terminal_print', (message) => {
       this.oldCommands.push({
         message: message
       })
@@ -100,26 +100,16 @@ export default {
     getCommand: function(ev) {
       var commandblock = this.$refs.commandblock.value;
       this.$refs.commandblock.value = '';
-
-      CommandHandler.handle(commandblock);
-
+      
       if (commandblock != 'clear' && commandblock != 'exit') {
         this.oldCommands.push({
           message: "> " + commandblock
         })
       }
-      // if (commandblock == 'home') {
-      //   router.push('/');
-      //   this.oldCommands.push({
-      //     message: 'Jumping to home'
-      //   })
-      // }
-      // else if (commandblock == 'tool') {
-      //   router.push('tool');
-      //   this.oldCommands.push({
-      //    message: 'Jumping to tool'
-      //   })
-      // }
+
+      CommandHandler.handle(commandblock);
+
+    
 
       //渲染完畢觸發
       this.$nextTick(function(){

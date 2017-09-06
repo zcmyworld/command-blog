@@ -9,5 +9,8 @@ export default {
   },
   clear() {
     EventBus.$emit('terminal_clear')
+  },
+  print(message) {
+    EventBus.$emit('terminal_print', message)
   }
 }
