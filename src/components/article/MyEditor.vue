@@ -29,13 +29,9 @@ export default {
 </script>
 
 <style scoped>
-  html,
-  body,
   #editor {
     margin: 0;
-    height: 100%;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    color: #333;
+    width: 100%;
   }
   
   textarea,
@@ -45,7 +41,7 @@ export default {
     height: 100%;
     vertical-align: top;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 20px;
   }
   
   textarea {
@@ -54,9 +50,11 @@ export default {
     resize: none;
     outline: none;
     background-color: #f6f6f6;
-    font-size: 14px;
-    font-family: 'Monaco', courier, monospace;
     padding: 20px;
+    min-height: 500px;
+    color: #666;
+    font-weight: 300;
+    line-height: 1.5;
   }
   
   code {

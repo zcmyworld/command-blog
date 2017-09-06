@@ -1,7 +1,7 @@
 <template>
   <div class="admin-edit-article">
     <div class="edit-title-box">
-      <input class="edit-title" placeholder="Title">
+      <input class="edit-title" placeholder="   Title">
     </div>
     <div class="created-box">
       <span>Posted on 2017.05.02</span>
