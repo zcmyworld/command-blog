@@ -3,8 +3,8 @@
     <h1 class="title">最简单的组件化工程</h1>
     <span class="post-time">Posted on 2017.05.02</span>
     <div class="content">
- <p>首先初始化一个项目，命名为v0.0.1，目录结构如下：</p>
-    <pre><code>vue-section-1-1
+      <p>首先初始化一个项目，命名为v0.0.1，目录结构如下：</p>
+      <pre><code>vue-section-1-1
   │  index.html
   │  vue.js
   └─components
@@ -12,10 +12,10 @@
       ├─Footer.js
       └─Header.js
 </code></pre>
-    <ol>
-      <li>不需要额外引入webpack等打包工具，使用&lt;script&gt;标签引入即可，上手简单</li>
-    </ol>
-    <pre><code>&lt;!DOCTYPE html&gt;
+      <ol>
+        <li>不需要额外引入webpack等打包工具，使用&lt;script&gt;标签引入即可，上手简单</li>
+      </ol>
+      <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
   &lt;meta charset="utf-8"&gt;
@@ -40,14 +40,22 @@
 &lt;/html&gt;
 </code></pre>
     </div>
-   
+
   </div>
 </template>
 
 <script>
-  hljs.initHighlightingOnLoad();
+import hljs from 'highlight.js'
+
+hljs.highlightCode =   function () { //自定义highlightCode方法，将只执行一次的逻辑去掉
+  let blocks = document.querySelectorAll('pre  code');
+  [].forEach.call(blocks, hljs.highlightBlock);
+};
 export default {
   name: 'MyPage',
+  mounted() {
+    hljs.highlightCode()
+  }
 }
 </script>
 
@@ -67,15 +75,15 @@ export default {
     font-weight: 300;
     line-height: 1.5;
   }
+  
   .title {
     font-weight: 400;
-
   }
   
   h1 {
     font-size: 1.8em;
   }
-
+  
   .content {
     border-top: 1px solid rgb(180, 180, 180);
     margin-top: 10px;
@@ -92,7 +100,7 @@ export default {
   p {
     margin-top: 5px;
   }
-
+  
   pre {
     margin-top: 20px;
     border: 1px solid rgb(180, 180, 180);
