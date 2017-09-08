@@ -8,13 +8,20 @@ $app->get('/itos/config', function (Request $request, Response $response) {
             [
                 'name' => 'article',
                 'commands' => ['edit', 'save', 'delte', 'quit', 'create']
+            ],
+            [
+
             ]
         ],
-        'defaultPlugin' => 'article',
+        'defaultPlugin' => 'install',
         'routes' => [
             [
                 'path' => '/',
-                'redirect' => '/article'
+                'redirect' => '/install'
+            ],
+            [
+                'path' => '/install',
+                'component' => 'install/InstallContent'
             ],
             [
                 'path' => '/article',
@@ -32,4 +39,9 @@ $app->get('/itos/config', function (Request $request, Response $response) {
     ];
     $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($rs);
     return $response;
+});
+
+
+$app->get('/itos/install', function (Request $request, Response $response) {
+
 });
