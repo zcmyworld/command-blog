@@ -12,5 +12,17 @@ export default {
   },
   print(message) {
     EventBus.$emit('terminal_print', message)
+  },
+  setCommand(key) {
+    this.command = key;
+  },
+  getCommand() {
+    return this.command;
+  },
+  setCommandArgs(key) {
+    this.commandArgs = key;
+  },
+  getCommandArgs() {
+    return this.commandArgs;
   }
 }

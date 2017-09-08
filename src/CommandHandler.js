@@ -19,19 +19,41 @@ function in_array(item, arr) {
 }
 
 
+/**
+ * 檢查輸入命令格式
+ */
+function checkCommand() {
+
+}
+
+/**
+ * 解析命令
+ */
+function parseCommand(key) {
+  var rs = key.split(' ');
+  var key = rs[0];
+  var args = rs.slice(1, rs.length);
+  return {
+    key: key,
+    args: args
+  }
+}
+
 function getCommand(key) {
   try {
     let pluginName = getPluginByPath();
     let model = null;
+    ITOS.Terminal.setCommand(key);
+    let commandKey = parseCommand(key);
     //判斷是否使用plugin裏面的命令
     if (ITOS.Plugin.isPlugin(pluginName)) {
-      if (ITOS.Plugin.isCommand(pluginName, key)) {
-        model = require(`@/components/${pluginName}/commands/${key}`);
+      if (ITOS.Plugin.isCommand(pluginName, commandKey.key)) {
+        model = require(`@/components/${pluginName}/commands/${commandKey.key}`);
       } else {
-        model = require(`@/commands/${key}`);
+        model = require(`@/commands/${commandKey.key}`);
       }
     } else {
-      model = require(`@/commands/${key}`);
+      model = require(`@/commands/${commandKey.key}`);
     }
 
     return model.default;
