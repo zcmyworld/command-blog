@@ -1,8 +1,6 @@
 
 import { EventBus } from '@/event-bus.js';
 import Router from 'vue-router'
-import MyPage from '@/components/article/MyPage'
-import MyContent from '@/components/article/MyContent'
 import Vue from 'vue'
 
 Vue.use(Router);
