@@ -43,8 +43,11 @@ function getCommand(key) {
   try {
     let pluginName = getPluginByPath();
     let model = null;
-    ITOS.Terminal.setCommand(key);
     let commandKey = parseCommand(key);
+    
+    ITOS.Terminal.setCommand(commandKey.key);
+    ITOS.Terminal.setCommandArgs(commandKey.args);
+    
     //判斷是否使用plugin裏面的命令
     if (ITOS.Plugin.isPlugin(pluginName)) {
       if (ITOS.Plugin.isCommand(pluginName, commandKey.key)) {
