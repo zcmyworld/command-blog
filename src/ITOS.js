@@ -21,9 +21,10 @@ class ITOS {
   init() {
     $.ajax({
       method: "get",
-      url: "http://192.168.2.8:3001",
+      url: "http://itos.dev.com/itos/config",
       async: false
     }).done((msg) => {
+      console.log(msg)
       this.Plugin = new Plugin(msg.plugins);
       // this.Plugin = new Plugin(msg.plugins);
       this.Router.setRoutes(msg.routes);
