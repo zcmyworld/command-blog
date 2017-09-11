@@ -25,15 +25,15 @@ $app->get('/itos/config', function (Request $request, Response $response) {
             ],
             [
                 'path' => '/article',
-                'component' => 'article/view/MyContent'
+                'component' => 'article/MyContent'
             ],
             [
                 'path' => '/article/:id/edit',
-                'component' => 'article/view/ArticleEdit'
+                'component' => 'article/ArticleEdit'
             ],
             [
                 'path' => '/article/:id',
-                'component' => 'article/view/MyPage'
+                'component' => 'article/MyPage'
             ]
         ]
     ];
