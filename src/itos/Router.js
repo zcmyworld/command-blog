@@ -31,7 +31,7 @@ class ITOSRouter {
 
 function view(name) {
   return function (resolve) {
-    require(['@/components/' + name + '.vue'], resolve);
+    require(['@/plugins/' + name + '.vue'], resolve);
   }
 };
 

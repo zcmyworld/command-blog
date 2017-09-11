@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import MyEditor from '@/components/article/MyEditor';
+import MyEditor from './MyEditor';
 export default {
   name: 'MyAdminEditArticle',
   components: {
