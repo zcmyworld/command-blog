@@ -51,7 +51,7 @@ function getCommand(key) {
     //判斷是否使用plugin裏面的命令
     if (ITOS.Plugin.isPlugin(pluginName)) {
       if (ITOS.Plugin.isCommand(pluginName, commandKey.key)) {
-        model = require(`@/components/${pluginName}/commands/${commandKey.key}`);
+        model = require(`@/plugins/article/view/${pluginName}/view/commands/${commandKey.key}`);
       } else {
         model = require(`@/commands/${commandKey.key}`);
       }

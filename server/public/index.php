@@ -5,7 +5,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 
 define('BASE_PATH', realpath('../') . '/');
-define('PLUGIN_PATH', realpath('../../src/plugins') . '/');
+define('PLUGIN_PATH', realpath('../plugins') . '/');
 define('SYS_PATH', realpath('../system').'/');
 
 $app = new \Slim\App;
