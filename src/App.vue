@@ -29,7 +29,7 @@ export default {
   methods: {
     keyboardHandler: function (ev) {
       //打开控制台
-      if (ev.code == 'Backquote') {
+      if (ev.code == 'Escape') {
         EventBus.$emit('ev_commandBoxChange')
       }
     }

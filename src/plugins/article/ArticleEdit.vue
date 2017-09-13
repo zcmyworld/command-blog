@@ -6,6 +6,8 @@
     <div class="created-box">
       <span>Posted on 2017.05.02</span>
     </div>
+    <summary-editor></summary-editor>
+    <hr>
     <my-editor></my-editor>
 
   </div>
@@ -13,10 +15,12 @@
 
 <script>
 import MyEditor from './MyEditor';
+import SummaryEditor from './SummaryEditor';
 export default {
   name: 'MyAdminEditArticle',
   components: {
-    MyEditor
+    MyEditor,
+    SummaryEditor
   }
 }
 </script>

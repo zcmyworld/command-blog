@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     inputKeydown: function(ev) {
-      if (ev.code == 'Backquote') {
+      if (ev.code == 'Escape') {
         ev.preventDefault();
       }
     },
