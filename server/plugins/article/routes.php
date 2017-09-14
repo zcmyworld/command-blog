@@ -27,6 +27,7 @@ $app->post('/articles', function (Request $request, Response $response) {
     $article->summary = $parsedBody['summary'];
     $article->content = $parsedBody['content'];
     $article->createdAt = time();
+    $article->modifiedAt = time();
     $id = R::store($article);
     $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson([
         'insertid'=> $id
@@ -45,9 +46,32 @@ $app->delete('/articles/{id}', function (Request $request, Response $response) {
 });
 
 $app->patch('/articles/{id}', function (Request $request, Response $response) {
-    $rs = [
-        'name' => 'article'
-    ];
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($rs);
+
+    $route = $request->getAttribute('route');
+    $id = $route->getArgument('id');
+
+    $article = R::load('articles', $id);
+
+    $parsedBody = $request->getParsedBody();
+
+    if (isset($parsedBody['title'])) {
+        $article->title = $parsedBody['title'];
+    }
+
+    if (isset($parsedBody['summary'])) {
+        $article->summary = $parsedBody['summary'];
+    }
+
+    if (isset($parsedBody['content'])) {
+        $article->content = $parsedBody['content'];
+    }
+
+    $article->modifiedAt = time();
+
+    $id = R::store($article);
+
+    $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson([
+        'insertid' => $id
+    ]);
     return $response;
 });
