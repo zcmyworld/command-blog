@@ -2,6 +2,7 @@
     "require": {
         "slim/slim": "^3.8",
         "curl/curl": "^1.8",
-        "alchemy/zippy": "^0.4.8"
+        "alchemy/zippy": "^0.4.8",
+        "gabordemooij/redbean": "dev-master"
     }
 }
