@@ -8,6 +8,9 @@ R::setup( 'mysql:host=localhost;dbname=itos', 'root', 'root' );
 
 $app->get('/articles', function (Request $request, Response $response) {
     $articles = R::find('articles');
+    foreach ($articles as &$article)  {
+        $article['posted'] = date("Y.m.d", time($article['createdAt']));
+    }
     $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($articles);
     return $response;
 });
