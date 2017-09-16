@@ -13,11 +13,11 @@ $app->get('/itos/config', function (Request $request, Response $response) {
 
             ]
         ],
-        'defaultPlugin' => 'install',
+        'defaultPlugin' => 'article',
         'routes' => [
             [
                 'path' => '/',
-                'redirect' => '/install'
+                'redirect' => '/article'
             ],
             [
                 'path' => '/install',

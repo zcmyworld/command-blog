@@ -19,6 +19,7 @@ $app->get('/articles/{id}', function (Request $request, Response $response) {
     $route = $request->getAttribute('route');
     $id = $route->getArgument('id');
     $article = R::load('articles', $id);
+    $article['posted'] = date("Y.m.d", time($article['createdAt']));
     $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($article);
     return $response;
 });

@@ -1,14 +1,14 @@
 <template>
   <div class="admin-edit-article">
     <div class="edit-title-box">
-      <input class="edit-title" v-model="article.title">
+      <input class="edit-title" placeholder="   Title">
     </div>
     <div class="created-box">
-      <span>Posted on {{article.posted}}</span>
+      <span>Posted on 2017.05.02</span>
     </div>
-    <summary-editor :summary="article.summary" hello="world"></summary-editor>
+    <summary-editor></summary-editor>
     <hr>
-    <my-editor :content="article.content"></my-editor>
+    <my-editor></my-editor>
 
   </div>
 </template>
@@ -16,35 +16,18 @@
 <script>
 import MyEditor from './MyEditor';
 import SummaryEditor from './SummaryEditor';
-import { EventBus } from './event-bus.js';
 export default {
   name: 'MyAdminEditArticle',
   components: {
     MyEditor,
     SummaryEditor
   },
-  data() {
-    return {
-      article: {}
-    }
-  },
   created: function() {
     this.$http.get('http://itos.dev.com/articles/5').then((res) =>{
       this.article = res.body;
+      console.log(this.article)
       return this;
     })
-    EventBus.$on('summary_change', (newsummary) => {
-      this.article.summary = newsummary;
-      return this;
-    })
-  },
-  watch: {
-    'article': {
-      handler: function (val, oldVal) { 
-        console.log('watch', val)
-      },
-      deep: true 
-    }
   }
 }
 </script>

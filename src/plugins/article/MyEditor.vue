@@ -1,6 +1,6 @@
 <template>
   <div id="editor">
-    <textarea :value="input" @input="update"></textarea>
+    <textarea :value="content"></textarea>
     <div v-html="compiledMarkdown" style="display:none"></div>
   </div>
 </template>
@@ -10,6 +10,9 @@ import _ from 'underscore';
 import marked from 'marked';
 export default {
   name: 'MyEditor',
+  props: {
+    content: "",
+  },
   data() {
     return {
       input: '# hello'

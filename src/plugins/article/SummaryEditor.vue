@@ -1,18 +1,18 @@
 <template>
   <div id="editor">
-    <textarea :value="input" @input="update"></textarea>
-    <div v-html="compiledMarkdown" style="display:none"></div>
+    <textarea v-model="msg"></textarea>
+    <!--<div v-html="compiledMarkdown" style="display:none"></div>-->
   </div>
 </template>
 
 <script>
 import _ from 'underscore';
 import marked from 'marked';
+import { EventBus } from './event-bus.js';
 export default {
   name: 'Summary',
   data() {
     return {
-      input: '# Summary'
     }
   },
   computed: {
@@ -20,10 +20,18 @@ export default {
       return marked(this.input, { sanitize: true })
     }
   },
-  methods: {
-    update: _.debounce(function (e) {
-      this.input = e.target.value
-    }, 300)
+  props: {
+    summary: "",
+  },
+  computed: {
+    msg: {
+      get: function() {
+        return this.summary;
+      }, 
+      set: function(newsummary) {
+        EventBus.$emit('summary_change', newsummary);
+      }
+    }
   }
 }
 </script>
