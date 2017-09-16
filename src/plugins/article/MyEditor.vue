@@ -1,6 +1,6 @@
 <template>
   <div id="editor">
-    <textarea :value="content"></textarea>
+    <textarea v-model="msg"></textarea>
     <div v-html="compiledMarkdown" style="display:none"></div>
   </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 import _ from 'underscore';
 import marked from 'marked';
+import { EventBus } from './event-bus.js';
 export default {
   name: 'MyEditor',
   props: {
@@ -21,6 +22,14 @@ export default {
   computed: {
     compiledMarkdown: function () {
       return marked(this.input, { sanitize: true })
+    },
+    msg: {
+      get: function() {
+        return this.content;
+      }, 
+      set: function(newcontent) {
+        EventBus.$emit('content_change', newcontent);
+      }
     }
   },
   methods: {

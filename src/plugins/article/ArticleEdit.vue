@@ -29,19 +29,33 @@ export default {
     }
   },
   created: function() {
-    this.$http.get('http://itos.dev.com/articles/5').then((res) =>{
+    var articleId = this.$route.params.id;
+    this.$http.get(`http://itos.dev.com/articles/${articleId}`).then((res) =>{
       this.article = res.body;
       return this;
-    })
+    });
     EventBus.$on('summary_change', (newsummary) => {
       this.article.summary = newsummary;
       return this;
-    })
+    });
+    EventBus.$on('content_change', (newcontent) => {
+      this.article.content = newcontent;
+      return this;
+    });
+    EventBus.$on('content_save', () => {
+      // console.log(this.$route.params)
+      console.log(this.article);
+      this.$http.delete(`http://itos.dev.com/articles/6`, this.article).then((res) =>{
+        console.log(res)
+        return this;
+      });
+      // return this;
+    });
   },
   watch: {
     'article': {
       handler: function (val, oldVal) { 
-        console.log('watch', val)
+        EventBus.$emit('article', val);
       },
       deep: true 
     }

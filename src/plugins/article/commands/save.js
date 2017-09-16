@@ -1,7 +1,9 @@
 import ITOS from '@/ITOS';
+import { EventBus } from '../event-bus.js';
 
 export default {
   exec() {
-    ITOS.Terminal.print('save success ..');
+    EventBus.$emit('content_save');
+    // ITOS.Terminal.print('save success ..');
   }
 }
