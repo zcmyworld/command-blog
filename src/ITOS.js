@@ -3,6 +3,7 @@ import ITOSRouter from '@/itos/Router';
 import Plugin from '@/itos/Plugin';
 import ws from '@/itos/Websocket';
 import { EventBus } from '@/event-bus.js';
+import Config from '@/itos/Config.js';
 import $ from 'jquery';
 
 import Vue from 'vue'
@@ -22,12 +23,13 @@ class ITOS {
     this.event = EventBus;
     this.Plugin = null;
     this.ws = ws;
+    this.Config = Config;
   }
 
   init() {
     $.ajax({
       method: "get",
-      url: "http://itos.dev.com/itos/config",
+      url: `http://itos.dev.com:81/itos/config`,
       async: false
     }).done((msg) => {
       this.Plugin = new Plugin(msg.plugins);

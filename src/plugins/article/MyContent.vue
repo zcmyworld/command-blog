@@ -15,6 +15,7 @@
 <script>
 import MyArticle from './MyArticle.vue';
 import { EventBus } from './event-bus.js';
+import ITOS from '@/ITOS.js';
 export default {
   name: 'MyContent',
   components: {
@@ -26,7 +27,7 @@ export default {
     }
   },
   created: function() {
-    this.$http.get('http://itos.dev.com/articles').then((res) =>{
+    this.$http.get(`${ITOS.Config.host}:${ITOS.Config.port}/articles`).then((res) =>{
       this.articles = res.body;
       return this;
     });
