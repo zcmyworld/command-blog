@@ -37,17 +37,18 @@ export default {
     }).catch((err) => {
       ITOS.Terminal.print('System error .. ');
     });
-    EventBus.$on('summary_change', (newsummary) => {
+    EventBus.$once('summary_change', (newsummary) => {
       this.article.summary = newsummary;
       return this;
     });
-    EventBus.$on('content_change', (newcontent) => {
+    EventBus.$once('content_change', (newcontent) => {
       this.article.content = newcontent;
       return this;
     });
-    EventBus.$on('content_save', () => {
+    EventBus.$once('content_save', () => {
       this.$http.patch(`http://itos.dev.com/articles/5`, this.article).then((res) =>{
         ITOS.Terminal.print('save success .. ');
+        ITOS.Router.router.push(`/article/${articleId}`);
         return this;
       }).catch((err) => {
         ITOS.Terminal.print('save error .. ');
