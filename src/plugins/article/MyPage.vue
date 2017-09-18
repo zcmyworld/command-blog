@@ -1,44 +1,9 @@
 <template>
   <div class="mypage">
-    <h1 class="title">最简单的组件化工程</h1>
-    <span class="post-time">Posted on 2017.05.02</span>
+    <h1 class="title">{{article.title}}</h1>
+    <span class="post-time">Posted on {{article.posted}}</span>
     <div class="content">
-      <p>首先初始化一个项目，命名为v0.0.1，目录结构如下：</p>
-      <pre><code>vue-section-1-1
-  │  index.html
-  │  vue.js
-  └─components
-      ├─Content.js
-      ├─Footer.js
-      └─Header.js
-</code></pre>
-      <ol>
-        <li>不需要额外引入webpack等打包工具，使用&lt;script&gt;标签引入即可，上手简单</li>
-      </ol>
-      <pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;meta charset="utf-8"&gt;
-  &lt;title&gt;my-project&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;script src="vue.js"&gt;&lt;/script&gt;
-  &lt;script src="components/Content.js"&gt;&lt;/script&gt;
-  &lt;script src="components/Header.js"&gt;&lt;/script&gt;
-  &lt;script src="components/Footer.js"&gt;&lt;/script&gt;
-  &lt;div id="app"&gt;
-    &lt;my-header&gt;&lt;/my-header&gt;
-    &lt;my-content&gt;&lt;/my-content&gt;
-    &lt;my-footer&gt;&lt;/my-footer&gt;
-  &lt;/div&gt;
-  &lt;script&gt;
-    new Vue({
-      el: "#app"
-    })
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+      {{article.content}}
     </div>
 
   </div>
@@ -58,9 +23,21 @@ export default {
   mounted() {
     hljs.highlightCode()
   },
+  data() {
+    return {
+      article: {}
+    }
+  },
   created() {
     //  ITOS.Router.router.push('/article/1/edit');
     var articleId = this.$route.params.id;
+
+    this.$http.get(`http://itos.dev.com/articles/${articleId}`).then((res) =>{
+      this.article = res.body;
+      return this;
+    }).catch((err) => {
+      ITOS.Terminal.print('System error .. ');
+    });
 
     EventBus.$on('content_edit', () => {
       ITOS.Router.router.push(`/article/${articleId}/edit`);
