@@ -6,12 +6,24 @@ use \RedBeanPHP\R as R;
 
 R::setup( 'mysql:host=localhost;dbname=itos', 'root', 'root' );
 
+$app->options('/articles', function ($request, $response, $args) {
+    return $response;
+});
+
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+});
+
 $app->get('/articles', function (Request $request, Response $response) {
     $articles = R::find('articles');
     foreach ($articles as &$article)  {
         $article['posted'] = date("Y.m.d", time($article['createdAt']));
     }
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($articles);
+    $response = $response->withJson($articles);
     return $response;
 });
 
@@ -20,7 +32,7 @@ $app->get('/articles/{id}', function (Request $request, Response $response) {
     $id = $route->getArgument('id');
     $article = R::load('articles', $id);
     $article['posted'] = date("Y.m.d", time($article['createdAt']));
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($article);
+    $response = $response->withJson($article);
     return $response;
 });
 
@@ -33,7 +45,7 @@ $app->post('/articles', function (Request $request, Response $response) {
     $article->createdAt = time();
     $article->modifiedAt = time();
     $id = R::store($article);
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson([
+    $response = $response->withJson([
         'insertid'=> $id
     ]);
     return $response;
@@ -45,7 +57,7 @@ $app->delete('/articles/{id}', function (Request $request, Response $response) {
     $id = $route->getArgument('id');
     $article = R::load('articles', $id);
     R::trash($article);
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson([]);
+    $response = $response->withJson([]);
     return $response;
 });
 
@@ -74,7 +86,7 @@ $app->patch('/articles/{id}', function (Request $request, Response $response) {
 
     $id = R::store($article);
 
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson([
+    $response = $response->withJson([
         'insertid' => $id
     ]);
     return $response;
