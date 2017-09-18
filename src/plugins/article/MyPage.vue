@@ -39,14 +39,8 @@ export default {
       ITOS.Terminal.print('System error .. ');
     });
 
-    EventBus.$on('content_edit', () => {
+    EventBus.$once('content_edit', () => {
       ITOS.Router.router.push(`/article/${articleId}/edit`);
-      // this.$http.patch(`http://itos.dev.com/articles/5`, this.article).then((res) =>{
-      //   ITOS.Terminal.print('save success .. ');
-      //   return this;
-      // }).catch((err) => {
-      //   ITOS.Terminal.print('save error .. ');
-      // });
     });
   }
 }
