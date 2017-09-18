@@ -16,6 +16,7 @@
 <script>
 import MyEditor from './MyEditor';
 import SummaryEditor from './SummaryEditor';
+import { EventBus } from './event-bus.js';
 export default {
   name: 'MyAdminEditArticle',
   components: {

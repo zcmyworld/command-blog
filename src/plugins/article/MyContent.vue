@@ -14,6 +14,7 @@
 
 <script>
 import MyArticle from './MyArticle.vue';
+import { EventBus } from './event-bus.js';
 export default {
   name: 'MyContent',
   components: {
@@ -28,7 +29,11 @@ export default {
     this.$http.get('http://itos.dev.com/articles').then((res) =>{
       this.articles = res.body;
       return this;
-    })
+    });
+
+    EventBus.$once('content_create', () => {
+      ITOS.Router.router.push(`/article/create`);
+    });
   }
 
 }
