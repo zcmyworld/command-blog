@@ -1,13 +1,13 @@
 <template>
   <div class="content">
     <div v-for="article in articles">
-      <div class="article">
-        <router-link to="/article/1">
+      <router-link :to="'/article/' + article.id">
+        <div class="article">
           <h1 class="title">{{article.title}}</h1>
           <span>Posted on {{article.posted}}</span>
           <p>{{article.summary}}</p>
-        </router-link>
-      </div>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>

@@ -17,6 +17,7 @@
 import MyEditor from './MyEditor';
 import SummaryEditor from './SummaryEditor';
 import { EventBus } from './event-bus.js';
+import ITOS from '@/ITOS';
 export default {
   name: 'MyAdminEditArticle',
   components: {
@@ -33,6 +34,8 @@ export default {
     this.$http.get(`http://itos.dev.com/articles/${articleId}`).then((res) =>{
       this.article = res.body;
       return this;
+    }).catch((err) => {
+      ITOS.Terminal.print('System error .. ');
     });
     EventBus.$on('summary_change', (newsummary) => {
       this.article.summary = newsummary;
@@ -43,13 +46,12 @@ export default {
       return this;
     });
     EventBus.$on('content_save', () => {
-      // console.log(this.$route.params)
-      console.log(this.article);
-      this.$http.delete(`http://itos.dev.com/articles/6`, this.article).then((res) =>{
-        console.log(res)
+      this.$http.patch(`http://itos.dev.com/articles/5`, this.article).then((res) =>{
+        ITOS.Terminal.print('save success .. ');
         return this;
+      }).catch((err) => {
+        ITOS.Terminal.print('save error .. ');
       });
-      // return this;
     });
   },
   watch: {

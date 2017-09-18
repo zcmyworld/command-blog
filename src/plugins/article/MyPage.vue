@@ -46,6 +46,8 @@
 
 <script>
 import hljs from 'highlight.js'
+import ITOS from '@/ITOS';
+import { EventBus } from './event-bus.js';
 
 hljs.highlightCode =   function () { //自定义highlightCode方法，将只执行一次的逻辑去掉
   let blocks = document.querySelectorAll('pre  code');
@@ -55,6 +57,20 @@ export default {
   name: 'MyPage',
   mounted() {
     hljs.highlightCode()
+  },
+  created() {
+    //  ITOS.Router.router.push('/article/1/edit');
+    var articleId = this.$route.params.id;
+
+    EventBus.$on('content_edit', () => {
+      ITOS.Router.router.push(`/article/${articleId}/edit`);
+      // this.$http.patch(`http://itos.dev.com/articles/5`, this.article).then((res) =>{
+      //   ITOS.Terminal.print('save success .. ');
+      //   return this;
+      // }).catch((err) => {
+      //   ITOS.Terminal.print('save error .. ');
+      // });
+    });
   }
 }
 </script>
