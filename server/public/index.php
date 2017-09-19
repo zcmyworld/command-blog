@@ -8,7 +8,20 @@ define('BASE_PATH', realpath('../') . '/');
 define('PLUGIN_PATH', realpath('../plugins') . '/');
 define('SYS_PATH', realpath('../system').'/');
 
-$app = new \Slim\App;
+$container = new \Slim\Container();
+$app = new \Slim\App($container);
+
+$app->add(new \Slim\Middleware\Session([
+    'name' => 'dummy_session',
+    'autorefresh' => true,
+    'lifetime' => '1 hour'
+]));
+
+$container = $app->getContainer();
+$container['session'] = function ($c) {
+    return new \SlimSession\Helper;
+};
+
 
 require  SYS_PATH . 'routes.php';
 
