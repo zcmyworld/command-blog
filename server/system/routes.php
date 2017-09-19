@@ -1,8 +1,9 @@
 <?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
 
-$app->get('/itos/config', function (Request $request, Response $response) {
+use \RedBeanPHP\R as R;
+
+
+$app->get('/itos/config', function ($request, $response) {
     $rs = [
         'plugins' => [
             [
@@ -46,6 +47,35 @@ $app->get('/itos/config', function (Request $request, Response $response) {
 });
 
 
-$app->get('/itos/install', function (Request $request, Response $response) {
+$app->get('/itos/install', function ($request, $response) {
 
+});
+
+
+$app->post('/user/login', function ($request, $response) {
+    $session = $this->session;
+    $parsedBody = $request->getParsedBody();
+    $uname = $parsedBody['uname'];
+    $pwd = $parsedBody['pwd'];
+    $user  = R::findOne( 'users', 'uname=?', [$uname]);
+    if (empty($user)) {
+        $response = $response->withJson([
+            "error" => 0,
+            "msg" => "Account or password error"
+        ]);
+        return $response;
+    }
+    if ($user->pwd == $pwd) {
+        $response = $response->withJson([
+            "error" => 0,
+            "msg" => "login success"
+        ]);
+        return $response;
+    } else {
+        $response = $response->withJson([
+            "error" => 0,
+            "msg" => "Account or password error"
+        ]);
+        return $response;
+    }
 });

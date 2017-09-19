@@ -4,8 +4,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 use \RedBeanPHP\R as R;
 
-R::setup( 'mysql:host=localhost;dbname=itos', 'root', 'root' );
-
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response

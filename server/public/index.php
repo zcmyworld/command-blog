@@ -2,6 +2,7 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
+use \RedBeanPHP\R as R;
 require '../vendor/autoload.php';
 
 define('BASE_PATH', realpath('../') . '/');
@@ -10,6 +11,8 @@ define('SYS_PATH', realpath('../system').'/');
 
 $container = new \Slim\Container();
 $app = new \Slim\App($container);
+
+R::setup( 'mysql:host=localhost;dbname=itos', 'root', 'root' );
 
 $app->add(new \Slim\Middleware\Session([
     'name' => 'dummy_session',
