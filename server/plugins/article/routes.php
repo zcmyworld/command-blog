@@ -6,16 +6,23 @@ use \RedBeanPHP\R as R;
 
 R::setup( 'mysql:host=localhost;dbname=itos', 'root', 'root' );
 
-$app->options('/articles', function ($request, $response, $args) {
-    return $response;
-});
-
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
         ->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+});
+
+$checkPermission = function ($request, $response, $next) {
+    $session = $this->session;
+    $response = $next($request, $response);
+    return $response;
+};
+
+
+$app->options('/articles', function ($request, $response, $args) {
+    return $response;
 });
 
 $app->get('/articles', function (Request $request, Response $response) {
@@ -49,7 +56,7 @@ $app->post('/articles', function (Request $request, Response $response) {
         'insertid'=> $id
     ]);
     return $response;
-});
+})->add($checkPermission);
 
 
 $app->delete('/articles/{id}', function (Request $request, Response $response) {
@@ -59,7 +66,7 @@ $app->delete('/articles/{id}', function (Request $request, Response $response) {
     R::trash($article);
     $response = $response->withJson([]);
     return $response;
-});
+})->add($checkPermission);
 
 $app->patch('/articles/{id}', function (Request $request, Response $response) {
 
@@ -90,4 +97,4 @@ $app->patch('/articles/{id}', function (Request $request, Response $response) {
         'insertid' => $id
     ]);
     return $response;
-});
+})->add($checkPermission);
