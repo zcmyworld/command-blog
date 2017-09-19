@@ -29,7 +29,7 @@ class ITOS {
   init() {
     $.ajax({
       method: "get",
-      url: `http://itos.dev.com:81/itos/config`,
+      url: `http://itos.dev.com/itos/config`,
       async: false
     }).done((msg) => {
       this.Plugin = new Plugin(msg.plugins);
