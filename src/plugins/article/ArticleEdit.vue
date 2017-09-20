@@ -32,7 +32,7 @@ export default {
   created: function() {
     var articleId = this.$route.params.id;
     this.$http.get(`http://itos.dev.com/articles/${articleId}`).then((res) =>{
-      this.article = res.body;
+      this.article = res.body.article;
       return this;
     }).catch((err) => {
       ITOS.Terminal.print('System error .. ');

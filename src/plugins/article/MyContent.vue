@@ -28,7 +28,7 @@ export default {
   },
   created: function() {
     this.$http.get(`http://${ITOS.Config.host}/articles`).then((res) =>{
-      this.articles = res.body;
+      this.articles = res.body.articles;
       return this;
     });
 

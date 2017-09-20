@@ -28,7 +28,10 @@ $app->get('/articles', function (Request $request, Response $response) {
     foreach ($articles as &$article)  {
         $article['posted'] = date("Y.m.d", time($article['createdAt']));
     }
-    $response = $response->withJson($articles);
+    $response = $response->withJson([
+        "error" => 0,
+        "articles" => $articles
+    ]);
     return $response;
 });
 
@@ -37,7 +40,10 @@ $app->get('/articles/{id}', function (Request $request, Response $response) {
     $id = $route->getArgument('id');
     $article = R::load('articles', $id);
     $article['posted'] = date("Y.m.d", time($article['createdAt']));
-    $response = $response->withJson($article);
+    $response = $response->withJson([
+        "error" => 0,
+        "article" => $article
+    ]);
     return $response;
 });
 
@@ -51,6 +57,7 @@ $app->post('/articles', function (Request $request, Response $response) {
     $article->modifiedAt = time();
     $id = R::store($article);
     $response = $response->withJson([
+        'error' => 0,
         'insertid'=> $id
     ]);
     return $response;
@@ -62,12 +69,13 @@ $app->delete('/articles/{id}', function (Request $request, Response $response) {
     $id = $route->getArgument('id');
     $article = R::load('articles', $id);
     R::trash($article);
-    $response = $response->withJson([]);
+    $response = $response->withJson([
+        'error' => 0
+    ]);
     return $response;
 })->add($checkPermission);
 
 $app->patch('/articles/{id}', function (Request $request, Response $response) {
-
     $route = $request->getAttribute('route');
     $id = $route->getArgument('id');
 
@@ -92,6 +100,7 @@ $app->patch('/articles/{id}', function (Request $request, Response $response) {
     $id = R::store($article);
 
     $response = $response->withJson([
+        'error' => 0,
         'insertid' => $id
     ]);
     return $response;
