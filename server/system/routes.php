@@ -51,6 +51,26 @@ $app->get('/itos/install', function ($request, $response) {
 
 });
 
+$app->get('/user/islogin', function ($request, $response) {
+    $session = $this->session;
+    $exists = $session->exists('uname');
+    if ($exists) {
+        $response = $response->withJson([
+            "error" => 0,
+            "data" => [
+                "isLogin" => true
+            ]
+        ]);
+        return $response;
+    }
+    $response = $response->withJson([
+        "error" => 0,
+        "data" => [
+            "isLogin" => false
+        ]
+    ]);
+    return $response;
+});
 
 $app->post('/user/login', function ($request, $response) {
     $session = $this->session;
@@ -66,6 +86,7 @@ $app->post('/user/login', function ($request, $response) {
         return $response;
     }
     if ($user->pwd == $pwd) {
+        $session['uname'] = $uname;
         $response = $response->withJson([
             "error" => 0,
             "msg" => "login success"
