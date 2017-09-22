@@ -53,7 +53,10 @@ $app->get('/itos/install', function ($request, $response) {
 
 $app->get('/user/islogin', function ($request, $response) {
     $session = $this->session;
-    $exists = $session->exists('uname');
+//    $exists = $session->exists('uname');
+//    $session->hello = 'world';
+    $exists = true;
+    
     if ($exists) {
         $response = $response->withJson([
             "error" => 0,

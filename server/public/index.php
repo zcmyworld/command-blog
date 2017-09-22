@@ -3,6 +3,8 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 use \RedBeanPHP\R as R;
+
+use \System\Session;
 require '../vendor/autoload.php';
 
 define('BASE_PATH', realpath('../') . '/');
@@ -14,16 +16,15 @@ $app = new \Slim\App($container);
 
 R::setup( 'mysql:host=localhost;dbname=itos', 'root', 'root' );
 
-$app->add(new \Slim\Middleware\Session([
-    'name' => 'dummy_session',
-    'autorefresh' => true,
-    'lifetime' => '1 hour'
-]));
+require '../system/session/SessionMiddleware.php';
+require '../system/session/Session.php';
 
 $container = $app->getContainer();
 $container['session'] = function ($c) {
-    return new \SlimSession\Helper;
+    return new \System\Session\Session();
 };
+
+$app->add(new \System\Session\SessionMiddleware($container));
 
 
 require  SYS_PATH . 'routes.php';
