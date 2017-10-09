@@ -14,18 +14,22 @@ class SessionMiddleware
 
     public function __invoke($request, $response, callable $next)
     {
-        $this->start();
+        $this->start($request);
         $response = $next($request, $response);
-        $this->end();
+        $response = $this->end($response);
         return $response;
     }
 
-    public function start() {
-        //获取header
+    public function start($request) {
+        $sessionKey = $request->getHeader('sessionkey');
+        $session = $this->container->session;
+        $session->load($sessionKey);
     }
 
-    public function end() {
-        //返回header
+    public function end($response) {
+        $session = $this->container->session;
+        $session->save();
+        return $response;
     }
 
 }

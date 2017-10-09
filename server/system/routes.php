@@ -2,6 +2,13 @@
 
 use \RedBeanPHP\R as R;
 
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+});
 
 $app->get('/itos/config', function ($request, $response) {
     $rs = [
@@ -89,10 +96,13 @@ $app->post('/user/login', function ($request, $response) {
         return $response;
     }
     if ($user->pwd == $pwd) {
-        $session['uname'] = $uname;
+        $session->uname = $uname;
         $response = $response->withJson([
             "error" => 0,
-            "msg" => "login success"
+            "msg" => "login success",
+            "data" => [
+                "sessionKey" => $session->id
+            ]
         ]);
         return $response;
     } else {

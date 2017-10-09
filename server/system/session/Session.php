@@ -2,6 +2,11 @@
 
 namespace System\Session;
 
+require SYS_PATH . 'session/driver/file.php';
+
+use System\Session\Driver\File;
+
+
 
 class Session
 {
@@ -18,18 +23,32 @@ class Session
         
     }
 
-    public function load()
+    public function load($sessionKey)
     {
-        //解析header
+        if (empty($sessionKey)) {
+            return $this->session;
+        }
+        $rs = File::load($sessionKey[0]);
+        
+        if (!empty($rs)) {
+            $this->session = $rs;     
+        }
+        
+        return $this->session;
+
     }
 
     public function save()
     {
-
+        if (!empty($this->session)) {
+            File::save($this->session);
+            return $this->session;
+        }
     }
     
     public function __set($name, $value)
     {
+        empty($this->session['id']) && $this->session['id'] = self::random();
         $this->session[$name] = $value;
     }
     

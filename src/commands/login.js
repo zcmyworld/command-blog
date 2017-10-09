@@ -21,10 +21,10 @@ export default {
       },
       async: false
     }).done((msg, status, xhr) => {
-      console.log(xhr)
-      console.log(xhr.getAllResponseHeaders())
-      var cookie = xhr.getResponseHeader('Set-Cookie');
-      console.log(cookie)
+      // console.log(xhr)
+      // console.log(xhr.getAllResponseHeaders())
+      // var cookie = xhr.getResponseHeader('Set-Cookie');
+      // console.log(cookie)
       console.log(msg)
     });
   }
