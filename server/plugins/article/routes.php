@@ -8,7 +8,7 @@ $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
         ->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, Sessionkey')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
 });
 
@@ -19,9 +19,6 @@ $checkPermission = function ($request, $response, $next) {
 };
 
 
-$app->options('/articles', function ($request, $response, $args) {
-    return $response;
-});
 
 $app->get('/articles', function (Request $request, Response $response) {
     $articles = R::find('articles');

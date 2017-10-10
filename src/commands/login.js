@@ -14,6 +14,9 @@ export default {
     // var pwd = args[1];
     $.ajax({
       method: "post",
+      headers: {
+        'Sessionkey': '6OIrCUZCFT2PNcup'
+      },
       url: `http://itos.dev.com/user/login`,
       data: {
         uname: 'itgo',
@@ -21,11 +24,12 @@ export default {
       },
       async: false
     }).done((msg, status, xhr) => {
-      // console.log(xhr)
-      // console.log(xhr.getAllResponseHeaders())
-      // var cookie = xhr.getResponseHeader('Set-Cookie');
-      // console.log(cookie)
-      console.log(msg)
+      if (msg.error != 0) {
+        ITOS.Terminal.print(msg.msg)
+        return;
+      }
+      //登录成功
+      ITOS.Terminal.print(msg.msg);
     });
   }
 }

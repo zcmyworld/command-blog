@@ -6,7 +6,7 @@ $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
         ->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, Sessionkey')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
 });
 
@@ -90,7 +90,7 @@ $app->post('/user/login', function ($request, $response) {
     $user  = R::findOne( 'users', 'uname=?', [$uname]);
     if (empty($user)) {
         $response = $response->withJson([
-            "error" => 0,
+            "error" => -1,
             "msg" => "Account or password error"
         ]);
         return $response;
@@ -107,7 +107,7 @@ $app->post('/user/login', function ($request, $response) {
         return $response;
     } else {
         $response = $response->withJson([
-            "error" => 0,
+            "error" => -1,
             "msg" => "Account or password error"
         ]);
         return $response;
