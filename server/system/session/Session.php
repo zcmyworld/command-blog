@@ -54,7 +54,10 @@ class Session
     
     public function __get($name)
     {
-        return $this->session[$name];
+        if (isset($this->session[$name])) {
+            return $this->session[$name];
+        }
+        return null;
     }
     
     public function delete() {

@@ -14,6 +14,21 @@ $app->add(function ($req, $res, $next) {
 
 $checkPermission = function ($request, $response, $next) {
     $session = $this->session;
+    $uname = $session->uname;
+    if (empty($uname)) {
+        $response = $response->withJson([
+            "error" => -1,
+            "msg" => '请先登录'
+        ]);
+        return $response;
+    }
+    if ($session->uname != 'itgo') {
+        $response = $response->withJson([
+            "error" => -1,
+            "msg" => '没有权限'
+        ]);
+        return $response;
+    }
     $response = $next($request, $response);
     return $response;
 };
@@ -30,7 +45,7 @@ $app->get('/articles', function (Request $request, Response $response) {
         "articles" => $articles
     ]);
     return $response;
-});
+})->add($checkPermission);
 
 $app->get('/articles/{id}', function (Request $request, Response $response) {
     $route = $request->getAttribute('route');

@@ -15,7 +15,7 @@ export default {
     $.ajax({
       method: "post",
       headers: {
-        'Sessionkey': '6OIrCUZCFT2PNcup'
+        'sessionkey': '1ZeUf2A7T91ngr8L'
       },
       url: `http://itos.dev.com/user/login`,
       data: {
