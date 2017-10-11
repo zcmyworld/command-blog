@@ -1,6 +1,7 @@
 import Terminal from '@/itos/Terminal';
 import ITOSRouter from '@/itos/Router';
 import Plugin from '@/itos/Plugin';
+import Session from '@/itos/Session';
 import ws from '@/itos/Websocket';
 import { EventBus } from '@/event-bus.js';
 import Config from '@/itos/Config.js';
@@ -22,6 +23,7 @@ class ITOS {
     this.Router = ITOSRouter;
     this.event = EventBus;
     this.Plugin = null;
+    this.Session = Session;
     this.ws = ws;
     this.Config = Config;
   }

@@ -37,7 +37,7 @@ $checkPermission = function ($request, $response, $next) {
 
 $app->get('/articles', function (Request $request, Response $response) {
     $articles = R::find('articles');
-    foreach ($articles as &$article)  {
+    foreach ($articles as &$article) {
         $article['posted'] = date("Y.m.d", time($article['createdAt']));
     }
     $response = $response->withJson([
@@ -45,7 +45,9 @@ $app->get('/articles', function (Request $request, Response $response) {
         "articles" => $articles
     ]);
     return $response;
-})->add($checkPermission);
+//})->add($checkPermission);
+});
+
 
 $app->get('/articles/{id}', function (Request $request, Response $response) {
     $route = $request->getAttribute('route');

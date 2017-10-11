@@ -7,29 +7,30 @@ export default {
     // console.log(ITOS.Terminal.getCommandArgs());
     var args = ITOS.Terminal.getCommandArgs();
     if (args.length != 2) {
-      // ITOS.Terminal.print('Command not implemented for that parameter');
-      // return;
+      ITOS.Terminal.print('Command not implemented for that parameter');
+      return;
     }
-    // var uname = args[0];
-    // var pwd = args[1];
+    var uname = args[0];
+    var pwd = args[1];
     $.ajax({
       method: "post",
       headers: {
-        'sessionkey': '1ZeUf2A7T91ngr8L'
+        'sessionkey': ITOS.Session.getSessionKey
       },
       url: `http://itos.dev.com/user/login`,
       data: {
-        uname: 'itgo',
-        pwd: '1234qwer'
+        uname: uname,
+        pwd: pwd
       },
       async: false
-    }).done((msg, status, xhr) => {
-      if (msg.error != 0) {
-        ITOS.Terminal.print(msg.msg)
+    }).done((resData, status, xhr) => {
+      if (resData.error != 0) {
+        ITOS.Terminal.print(resData.msg)
         return;
       }
+      ITOS.Session.saveSessionKey(resData.data.sessionkey);
       //登录成功
-      ITOS.Terminal.print(msg.msg);
+      ITOS.Terminal.print(resData.msg);
     });
   }
 }

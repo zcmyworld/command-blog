@@ -101,7 +101,7 @@ $app->post('/user/login', function ($request, $response) {
             "error" => 0,
             "msg" => "login success",
             "data" => [
-                "sessionKey" => $session->id
+                "sessionkey" => $session->id
             ]
         ]);
         return $response;

@@ -46,9 +46,12 @@ export default {
       return this;
     });
     EventBus.$on('content_save', () => {
-      this.$http.patch(`http://itos.dev.com/articles/5`, this.article).then((res) =>{
-        ITOS.Terminal.print('save success .. ');
-        ITOS.Router.router.push(`/article/${articleId}`);
+      this.$http.patch(`http://itos.dev.com/articles/5`, this.article).then((resData) =>{
+        ITOS.Terminal.print(resData.body.msg);
+        if (resData.code == 0) {
+          ITOS.Router.router.push(`/article/${articleId}`);
+          return;
+        }
         return this;
       }).catch((err) => {
         ITOS.Terminal.print('save error .. ');
