@@ -46,14 +46,19 @@ export default {
       return this;
     });
     EventBus.$on('content_save', () => {
-      this.$http.patch(`http://itos.dev.com/articles/5`, this.article).then((resData) =>{
+      this.$http.patch(`http://itos.dev.com/articles/5`, this.article, {
+        headers: {
+          'sessionkey': ITOS.Session.getSessionKey()
+        }
+      }).then((resData) =>{
         ITOS.Terminal.print(resData.body.msg);
-        if (resData.code == 0) {
+        if (resData.body.code == 0) {
           ITOS.Router.router.push(`/article/${articleId}`);
           return;
         }
         return this;
       }).catch((err) => {
+        console.log(err)
         ITOS.Terminal.print('save error .. ');
       });
     });

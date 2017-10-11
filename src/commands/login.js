@@ -15,7 +15,7 @@ export default {
     $.ajax({
       method: "post",
       headers: {
-        'sessionkey': ITOS.Session.getSessionKey
+        'sessionkey': ITOS.Session.getSessionKey()
       },
       url: `http://itos.dev.com/user/login`,
       data: {

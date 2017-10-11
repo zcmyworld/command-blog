@@ -18,14 +18,14 @@ $checkPermission = function ($request, $response, $next) {
     if (empty($uname)) {
         $response = $response->withJson([
             "error" => -1,
-            "msg" => '请先登录'
+            "msg" => 'Login in first'
         ]);
         return $response;
     }
     if ($session->uname != 'itgo') {
         $response = $response->withJson([
             "error" => -1,
-            "msg" => '没有权限'
+            "msg" => 'Permission defined'
         ]);
         return $response;
     }
@@ -45,7 +45,6 @@ $app->get('/articles', function (Request $request, Response $response) {
         "articles" => $articles
     ]);
     return $response;
-//})->add($checkPermission);
 });
 
 
@@ -71,8 +70,11 @@ $app->post('/articles', function (Request $request, Response $response) {
     $article->modifiedAt = time();
     $id = R::store($article);
     $response = $response->withJson([
-        'error' => 0,
-        'insertid'=> $id
+        'code' => 0,
+        'msg' => 'post success',
+        'data' => [
+            'insertid'=> $id
+        ]
     ]);
     return $response;
 })->add($checkPermission);
@@ -114,8 +116,11 @@ $app->patch('/articles/{id}', function (Request $request, Response $response) {
     $id = R::store($article);
 
     $response = $response->withJson([
-        'error' => 0,
-        'insertid' => $id
+        'code' => 0,
+        'msg' => 'save success',
+        'data' => [
+            'insertid'=> $id
+        ]
     ]);
     return $response;
 })->add($checkPermission);
