@@ -37,6 +37,14 @@ class Session
         return $this->session;
 
     }
+    
+    public function forget() {
+        if (!empty($this->session)) {
+            File::delete($this->session);
+            $this->session = [];
+            return [];
+        }
+    }
 
     public function save()
     {

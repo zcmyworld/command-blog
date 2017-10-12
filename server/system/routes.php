@@ -58,6 +58,18 @@ $app->get('/itos/install', function ($request, $response) {
 
 });
 
+$app->get('/user/logout', function ($request, $response) {
+    $this->session->forget();
+
+    $response = $response->withJson([
+        "error" => 0,
+        "msg" => "Byebye",
+        "data" => [
+        ]
+    ]);
+    return $response;
+});
+
 $app->get('/user/islogin', function ($request, $response) {
     $session = $this->session;
 //    $exists = $session->exists('uname');

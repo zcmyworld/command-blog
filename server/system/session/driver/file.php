@@ -36,9 +36,9 @@ class File {
      * @param  string  $id
      * @return void
      */
-    public function delete($id)
+    public static function delete($session)
     {
-//        @unlink(APP_PATH.'storage/sessions/'.$id);
+        @unlink(self::$TMP_PATH . $session['id']);
     }
 
     /**
