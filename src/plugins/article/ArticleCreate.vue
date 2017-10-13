@@ -6,10 +6,6 @@
     <div class="created-box">
       <span>Posted on 2017.05.02</span>
     </div>
-    <summary-editor></summary-editor>
-    <hr>
-    <my-editor></my-editor>
-
   </div>
 </template>
 
@@ -20,15 +16,11 @@ import { EventBus } from './event-bus.js';
 export default {
   name: 'MyAdminEditArticle',
   components: {
-    MyEditor,
-    SummaryEditor
+    // MyEditor,
+    // SummaryEditor
   },
   created: function() {
-    this.$http.get('http://itos.dev.com/articles/5').then((res) =>{
-      this.article = res.body;
-      console.log(this.article)
-      return this;
-    })
+
   }
 }
 </script>

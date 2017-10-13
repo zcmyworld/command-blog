@@ -46,7 +46,7 @@ $app->get('/itos/config', function ($request, $response) {
             [
             'path' => '/article/create',
             'component' => 'article/AtricleCreate'
-        ]
+            ]
         ]
     ];
     $response = $response->withHeader('Access-Control-Allow-Origin', '*')->withJson($rs);

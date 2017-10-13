@@ -13,13 +13,11 @@
 </template>
 
 <script>
-import MyArticle from './MyArticle.vue';
 import { EventBus } from './event-bus.js';
 import ITOS from '@/ITOS.js';
 export default {
   name: 'MyContent',
   components: {
-    MyArticle
   },
   data: function() {
     return {
@@ -33,7 +31,7 @@ export default {
     });
 
     EventBus.$once('content_create', () => {
-      ITOS.Router.router.push(`/article/create`);
+      // ITOS.Router.router.push(`/article/create`);
     });
   }
 
