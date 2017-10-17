@@ -44,7 +44,7 @@ $app->get('/itos/config', function ($request, $response) {
                 'component' => 'article/MyPage'
             ],
             [
-            'path' => '/articlecreate',
+            'path' => '/article/create/create',
             'component' => 'article/ArticleCreate'
             ]
         ]

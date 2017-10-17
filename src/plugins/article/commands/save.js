@@ -8,7 +8,10 @@ export default {
     //判斷路由, /article/:id
     if (/^\/article\/[0-9]*\/edit$/.test(currentRoute)) {
       EventBus.$emit('content_save');
-    } else {
+    } else if (/^\/article\/create\/create$/.test(currentRoute)) {
+      EventBus.$emit('content_create');
+    }
+    else {
       ITOS.Terminal.print('You need to open and article to use this function');
     }
   }

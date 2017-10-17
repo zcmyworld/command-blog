@@ -1,30 +1,57 @@
 <template>
   <div class="admin-edit-article">
     <div class="edit-title-box">
-      <input class="edit-title" placeholder="   Title">
+      <input class="edit-title" placeholder="   Title" v-model="article.title">
     </div>
     <div class="created-box">
-      <span>Posted on 2017.05.02</span>
     </div>
-    <summary-editor></summary-editor>
+    <summary-editor :summary="article.summary"></summary-editor>
     <hr>
-    <my-editor></my-editor>
-
+    <my-editor :content="article.content"></my-editor>
   </div>
 </template>
-
 <script>
 import MyEditor from './MyEditor';
 import SummaryEditor from './SummaryEditor';
 import { EventBus } from './event-bus.js';
+import ITOS from '@/ITOS';
 export default {
   name: 'MyAdminEditArticle',
   components: {
     MyEditor,
     SummaryEditor
   },
+  data() {
+    return {
+      article: {}
+    }
+  },
   created: function() {
-
+    EventBus.$on('summary_change', (newsummary) => {
+      this.article.summary = newsummary;
+      return this;
+    });
+    EventBus.$on('content_change', (newcontent) => {
+      this.article.content = newcontent;
+      return this;
+    });
+    EventBus.$on('content_create', () => {
+      this.$http.post(`http://itos.dev.com/articles`, this.article, {
+        headers: {
+          'sessionkey': ITOS.Session.getSessionKey()
+        }
+      }).then((resData) =>{
+        ITOS.Terminal.print(resData.body.msg);
+        if (resData.body.code == 0) {
+          ITOS.Router.router.push(`/article`);
+          return;
+        }
+        return this;
+      }).catch((err) => {
+        console.log(err)
+        ITOS.Terminal.print('save error .. ');
+      });
+    });
   }
 }
 </script>

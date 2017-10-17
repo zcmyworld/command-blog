@@ -36,10 +36,11 @@ $checkPermission = function ($request, $response, $next) {
 
 
 $app->get('/articles', function (Request $request, Response $response) {
-    $articles = R::find('articles');
+    $articles = R::findAll('articles', 'ORDER BY id DESC');
     foreach ($articles as &$article) {
         $article['posted'] = date("Y.m.d", time($article['createdAt']));
     }
+    $articles = R::exportAll($articles);
     $response = $response->withJson([
         "error" => 0,
         "articles" => $articles
