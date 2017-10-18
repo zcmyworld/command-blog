@@ -6,7 +6,7 @@
     <div class="created-box">
       <span>Posted on {{article.posted}}</span>
     </div>
-    <summary-editor :summary="article.summary" hello="world"></summary-editor>
+    <summary-editor :summary="article.summary"></summary-editor>
     <hr>
     <my-editor :content="article.content"></my-editor>
 

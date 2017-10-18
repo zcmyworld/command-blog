@@ -2,7 +2,9 @@
   <div class="header-box">
     <div class="header">
       <div class="header-left">
-        <div class="header-left-title">Itgo</div>
+        <router-link to="/">
+          <div class="header-left-title">Itgo</div>
+        </router-link>
         <div v-if="isCommand" v-on:click="showCommandBox" class="drop-box" key="normal">
           <div class="icono-caretDown"></div>
         </div>
@@ -224,5 +226,11 @@ export default {
   img {
     width: 100%;
     height: 100%;
+  }
+
+    
+  a {
+    text-decoration: none;
+    color: #666;
   }
 </style>
