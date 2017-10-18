@@ -46,7 +46,8 @@ export default {
       return this;
     });
     EventBus.$on('content_save', () => {
-      this.$http.patch(`http://itos.dev.com/articles/5`, this.article, {
+      var articleId = this.$route.params.id;
+      this.$http.patch(`http://itos.dev.com/articles/${articleId}`, this.article, {
         headers: {
           'sessionkey': ITOS.Session.getSessionKey()
         }
