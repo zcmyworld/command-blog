@@ -32,6 +32,9 @@ export default {
 
     this.$http.get(`http://itos.dev.com/articles/${articleId}`).then((res) =>{
       this.article = res.body.article;
+      this.$nextTick(function(){
+        hljs.highlightCode()
+      })
       return this;
     }).catch((err) => {
       ITOS.Terminal.print('System error .. ');
@@ -40,16 +43,6 @@ export default {
     EventBus.$once('content_edit', () => {
       ITOS.Router.router.push(`/article/${articleId}/edit`);
     });
-  },
-  watch: {
-    'article': {
-      handler: function (val, oldVal) { 
-        console.log(val)
-        hljs.highlightCode()
-        // this.article = val;
-      },
-      deep: true 
-    }
   }
 }
 </script>
