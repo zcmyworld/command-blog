@@ -28,7 +28,8 @@ export default {
         return this.content;
       }, 
       set: function(newcontent) {
-        EventBus.$emit('content_change', newcontent);
+        var newmdcontent = marked(newcontent, { sanitize: true })
+        EventBus.$emit('content_change', newcontent, newmdcontent);
       }
     }
   },

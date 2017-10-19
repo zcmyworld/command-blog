@@ -5,7 +5,7 @@
         <div class="article">
           <h1 class="title">{{article.title}}</h1>
           <span>Posted on {{article.posted}}</span>
-          <p>{{article.summary}}</p>
+          <p v-html="article.mdsummary"></p>
         </div>
       </router-link>
     </div>

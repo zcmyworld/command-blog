@@ -27,12 +27,14 @@ export default {
     }
   },
   created: function() {
-    EventBus.$on('summary_change', (newsummary) => {
+    EventBus.$on('summary_change', (newsummary, mdsummary) => {
       this.article.summary = newsummary;
+      this.article.mdsummary = newmdsummary;
       return this;
     });
-    EventBus.$on('content_change', (newcontent) => {
+    EventBus.$on('content_change', (newcontent, newmdcontent) => {
       this.article.content = newcontent;
+      this.article.mdcontent = newmdcontent;
       return this;
     });
     EventBus.$on('content_create', () => {

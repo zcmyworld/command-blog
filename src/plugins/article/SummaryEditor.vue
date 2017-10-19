@@ -29,7 +29,8 @@ export default {
         return this.summary;
       }, 
       set: function(newsummary) {
-        EventBus.$emit('summary_change', newsummary);
+        var newmdsummary = marked(newsummary, { sanitize: true })
+        EventBus.$emit('summary_change', newsummary, newmdsummary);
       }
     }
   }

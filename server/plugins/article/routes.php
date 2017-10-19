@@ -67,6 +67,8 @@ $app->post('/articles', function (Request $request, Response $response) {
     $article->title = $parsedBody['title'];
     $article->summary = $parsedBody['summary'];
     $article->content = $parsedBody['content'];
+    $article->mdcontent = $parsedBody['mdcontent'];
+    $article->mdsummary = $parsedBody['mdsummary'];
     $article->createdAt = time();
     $article->modifiedAt = time();
     $id = R::store($article);
@@ -110,6 +112,14 @@ $app->patch('/articles/{id}', function (Request $request, Response $response) {
 
     if (isset($parsedBody['content'])) {
         $article->content = $parsedBody['content'];
+    }
+
+    if (isset($parsedBody['mdsummary'])) {
+        $article->mdsummary = $parsedBody['mdsummary'];
+    }
+
+    if (isset($parsedBody['mdcontent'])) {
+        $article->mdcontent = $parsedBody['mdcontent'];
     }
 
     $article->modifiedAt = time();
