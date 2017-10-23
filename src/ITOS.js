@@ -35,13 +35,11 @@ class ITOS {
       async: false
     }).done((msg) => {
       this.Plugin = new Plugin(msg.plugins);
-      // this.Plugin = new Plugin(msg.plugins);
       this.Router.setRoutes(msg.routes);
     });
 
     Vue.config.productionTip = false
 
-    /* eslint-disable no-new */
     new Vue({
       el: '#app',
       router,
@@ -52,8 +50,3 @@ class ITOS {
   }
 }
 export default new ITOS();
-
-// router.addRoutes([{
-//       path: '/article/:id/edit',
-//       component: MyPage
-//     }]);

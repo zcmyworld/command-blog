@@ -29,7 +29,9 @@ export default {
   methods: {
     keyboardHandler: function (ev) {
       //打开控制台
+      console.log(ev.code)
       if (ev.code == 'Escape') {
+        console.log('success')
         EventBus.$emit('ev_commandBoxChange')
       }
     }
