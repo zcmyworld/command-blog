@@ -1,4 +1,4 @@
 export default {
-  host: 'itos.dev.com',
+  host: 'api.zcmyworld.com',
   port: '80'
 }
