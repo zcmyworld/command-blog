@@ -1,5 +1,6 @@
 import ITOS from '@/ITOS';
 import $ from 'jquery';
+import Config from '@/itos/Config';
 
 export default {
   name: 'login',
@@ -17,7 +18,7 @@ export default {
       headers: {
         'sessionkey': ITOS.Session.getSessionKey()
       },
-      url: `http://itos.dev.com/user/login`,
+      url: `http://${Config.host}:${Config.port}/user/login`,
       data: {
         uname: uname,
         pwd: pwd

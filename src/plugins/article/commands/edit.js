@@ -1,6 +1,7 @@
 import ITOS from '@/ITOS';
 import { EventBus } from '../event-bus.js';
 import $ from 'jquery';
+import Config from './../Config';
 
 export default {
   exec(route_path) {
@@ -10,7 +11,7 @@ export default {
     if (/^\/article\/[0-9]*$/.test(currentRoute)) {
       $.ajax({
         method: "get",
-        url: `http://itos.dev.com/user/islogin`,
+        url: `http://${Config.host}:${Config.port}/user/islogin`,
         async: false
       }).done((msg) => {
         if (msg.data.isLogin) {

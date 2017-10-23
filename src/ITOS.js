@@ -31,7 +31,7 @@ class ITOS {
   init() {
     $.ajax({
       method: "get",
-      url: `http://itos.dev.com/itos/config`,
+      url: `http://${Config.host}:${Config.port}/itos/config`,
       async: false
     }).done((msg) => {
       this.Plugin = new Plugin(msg.plugins);

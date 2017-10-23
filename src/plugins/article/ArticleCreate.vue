@@ -14,6 +14,7 @@
 import MyEditor from './MyEditor';
 import SummaryEditor from './SummaryEditor';
 import { EventBus } from './event-bus.js';
+import Config from './Config';
 import ITOS from '@/ITOS';
 export default {
   name: 'MyAdminEditArticle',
@@ -38,7 +39,7 @@ export default {
       return this;
     });
     EventBus.$on('content_create', () => {
-      this.$http.post(`http://itos.dev.com/articles`, this.article, {
+      this.$http.post(`http://${Config.host}:${Config.port}/articles`, this.article, {
         headers: {
           'sessionkey': ITOS.Session.getSessionKey()
         }

@@ -1,6 +1,7 @@
 import ITOS from '@/ITOS';
 
 import $ from 'jquery';
+import Config from '@/itos/Config';
 
 export default {
   name: 'bye',
@@ -10,7 +11,7 @@ export default {
       headers: {
         'sessionkey': ITOS.Session.getSessionKey()
       },
-      url: `http://itos.dev.com/user/logout`,
+      url: `http://${Config.host}:${Config.port}/user/logout`,
       async: false
     }).done((resData, status, xhr) => {
       if (resData.error != 0) {

@@ -17,6 +17,7 @@
 import MyEditor from './MyEditor';
 import SummaryEditor from './SummaryEditor';
 import { EventBus } from './event-bus.js';
+import Config from './Config';
 import ITOS from '@/ITOS';
 export default {
   name: 'MyAdminEditArticle',
@@ -31,7 +32,7 @@ export default {
   },
   created: function() {
     var articleId = this.$route.params.id;
-    this.$http.get(`http://itos.dev.com/articles/${articleId}`).then((res) =>{
+    this.$http.get(`http://${Config.host}:${Config.port}/articles/${articleId}`).then((res) =>{
       this.article = res.body.article;
       return this;
     }).catch((err) => {
@@ -49,7 +50,7 @@ export default {
     });
     EventBus.$on('content_save', () => {
       var articleId = this.$route.params.id;
-      this.$http.patch(`http://itos.dev.com/articles/${articleId}`, this.article, {
+      this.$http.patch(`http://${Config.host}:${Config.port}/articles/${articleId}`, this.article, {
         headers: {
           'sessionkey': ITOS.Session.getSessionKey()
         }

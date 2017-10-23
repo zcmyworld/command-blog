@@ -11,6 +11,7 @@ import hljs from 'highlight.js'
 import ITOS from '@/ITOS';
 import { EventBus } from './event-bus.js';
 import $ from 'jquery';
+import Config from './Config';
 
 hljs.highlightCode =   function () { //自定义highlightCode方法，将只执行一次的逻辑去掉
   let blocks = document.querySelectorAll('pre  code');
@@ -30,7 +31,7 @@ export default {
     //  ITOS.Router.router.push('/article/1/edit');
     var articleId = this.$route.params.id;
 
-    this.$http.get(`http://itos.dev.com/articles/${articleId}`).then((res) =>{
+    this.$http.get(`http://${Config.host}:${Config.port}/articles/${articleId}`).then((res) =>{
       this.article = res.body.article;
       this.$nextTick(function(){
         hljs.highlightCode()
