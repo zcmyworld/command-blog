@@ -83,7 +83,7 @@ export default {
   methods: {
     inputKeydown: function(ev) {
       if (ev.code == 'Escape') {
-        ev.preventDefault();
+        // ev.preventDefault();
       }
     },
     clickCommandBox: function() {
