@@ -30,7 +30,7 @@ export default {
     keyboardHandler: function (ev) {
       //打开控制台
       console.log(ev.code)
-      if (ev.code == 'Escape') {
+      if (ev.code == 'Backquote') {
         console.log('success')
         EventBus.$emit('ev_commandBoxChange')
       }
