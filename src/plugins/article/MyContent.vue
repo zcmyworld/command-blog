@@ -1,13 +1,13 @@
 <template>
   <div class="content">
     <div v-for="article in articles">
-        <div class="article">
           <a v-bind:href="article.link" target="_blank">
+        <div class="article">
           <h1 class="title">{{article.title}}</h1>
           <span>Posted on {{article.posted}}</span>
           <p v-html="article.mdsummary"></p>
-          </a>
         </div>
+          </a>
     </div>
   </div>
 </template>
