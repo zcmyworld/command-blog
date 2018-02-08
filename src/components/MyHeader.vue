@@ -13,9 +13,12 @@
         </div>
       </div>
       <div class="header-right">
-        <div class="github-icon">
+        <a class="oldblog-icon" href="http://oldblog.zcmyworld.com" target="_blank">
+          旧的博客
+        </a>
+        <a class="github-icon" href="https://github.com/zcmyworld" target="_blank">
           <img src="../assets/github.png">
-        </div>
+        </a>
       </div>
     </div>
     <div class="command-box" v-on:click="clickCommandBox">
@@ -195,6 +198,8 @@ export default {
   
   .header-right {
     height: 60px;
+    display: flex;
+    justify-content: space-between;
   }
   
   .header-left-title {
@@ -214,6 +219,14 @@ export default {
   .icono-caretDown {
     color: #666;
   }
+
+  .oldblog-icon {
+    cursor: pointer;
+    line-height: 60px;
+    width: 100px;
+    height: 60px;
+    display: block;
+  }
   
   .github-icon {
     cursor: pointer;
@@ -221,6 +234,7 @@ export default {
     margin-top: 10px;
     width: 30px;
     height: 30px;
+    display: block;
   }
   
   img {

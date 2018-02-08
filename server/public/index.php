@@ -14,7 +14,7 @@ define('SYS_PATH', realpath('../system').'/');
 $container = new \Slim\Container();
 $app = new \Slim\App($container);
 
-R::setup( 'mysql:host=localhost;dbname=itos', 'root', 'root' );
+R::setup( 'mysql:host=120.24.60.7;dbname=itos', 'root', '648e31d7' );
 
 require '../system/session/SessionMiddleware.php';
 require '../system/session/Session.php';
